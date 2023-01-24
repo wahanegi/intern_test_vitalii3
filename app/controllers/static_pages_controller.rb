@@ -1,9 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    if user_signed_in?
-      @postedmessages = current_user.postedmessages
-      @feed_items = current_user.feed
-    end
-    #debugger
+    @feed_full = current_user.feed if user_signed_in?
   end
 end

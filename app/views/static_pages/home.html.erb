@@ -1,6 +1,10 @@
-<% provide(:title, "Home") %>
-<% if user_signed_in?  %>
-  <%= render 'users/shared/home_logged' %>
+<% provide(:title, "HOME") %>
+<% if signed_in? %>
+  <%= render 'devise/shared/logged' %>
 <% else %>
-  <%= render 'users/shared/home_unlogged' %>
+  <h1>HELLO EVERYONE</h1>
 <% end %>
+
+
+
+

@@ -1,0 +1,14 @@
+<li class="card">
+  <section>
+    <aside class="avatar">
+      <span class="user_info">#<%= object.id %></span>
+      <div class="left-side">
+        <%= gravatar_for(current_user.seek_user(object.user_id), size: 100) %>
+      </div>
+    </aside>
+  </section>
+  <span> <%= "@#{current_user.seek_user(object.user_id).name}-#{current_user.seek_user(object.user_id).email}}" %> | </span>
+  <span>Posted <%= distance_of_time_in_words_to_now(object.created_at)%> ago</span>
+  <div class="posted_message"><p class="content"><%= object.content%></p></div>
+</li>
+

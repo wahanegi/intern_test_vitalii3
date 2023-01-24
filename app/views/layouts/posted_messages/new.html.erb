@@ -1,0 +1,14 @@
+<% provide(:title, "NEW MESSAGE") %>
+<div class="wrapper">
+  <h2 text-align="center">NEW MESSAGE</h2>
+  <div class="cover">
+
+<%= render 'form', object: @message  %>
+
+<br/>
+
+<div class="link">
+  <%= link_to "BACK TO MAIN PAGE", home_path%>
+</div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="road">
+  <ul>
+<% @feed_full.each do |o| %>
+    <%= render 'devise/shared/card', object: o %>
+    <% end %>
+  </ul>
+</div>

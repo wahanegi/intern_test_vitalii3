@@ -70,3 +70,12 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# NEED Adding gems:
+#
+# DEVISE:
+gem "devise"
+#FOR HANDLING IMAGES:
+# gem
+#FOR FILLING MESSAGES DATA:
+# gem
