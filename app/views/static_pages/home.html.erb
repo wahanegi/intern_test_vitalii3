@@ -1,0 +1,6 @@
+<% provide(:title, "Home") %>
+<% if user_signed_in?  %>
+  <%= render 'users/shared/home_logged' %>
+<% else %>
+  <%= render 'users/shared/home_unlogged' %>
+<% end %>
