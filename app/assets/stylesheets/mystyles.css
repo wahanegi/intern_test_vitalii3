@@ -355,3 +355,18 @@ aside section h1 {
     width: 100%;
     height:10em;
 }
+.but_input input{
+    width: 100%;
+    height: 50px;
+    background-color: aqua;
+    box-shadow: inset 3px 3px 5px lightskyblue,
+    inset -3px -3px 5px lightskyblue;
+    margin-inline-start: 0;
+    margin: 30px auto 0 auto;
+    border: 1px solid black;
+    border-radius: 15px;
+    font-weight: 200;
+    transition: .3s;
+}
+
+

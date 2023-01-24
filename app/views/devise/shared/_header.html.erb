@@ -13,6 +13,7 @@
 <% else %>
       <%= button_to "LOG OUT", destroy_user_session_path(), method: :delete, class: "button_menu" %>
       <ul>
+        <li><%= link_to 'LOG OUT', destroy_user_session_url(), data:{turbo_method: "delete"} %></li>
         <li>
           <%= link_to "NEW MESSAGE", new_posted_message_path %>
         </li>

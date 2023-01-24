@@ -11,11 +11,11 @@ class PostedMessagesController < ApplicationController
     moral = true
     ########################################################################################
 
-    if @message.save! && moral
+    if @message.save && moral
       flash[:notice] = "Congratulations. Your message was posted on  our famous GIGGLE-platform 💪I🤫🤣🦶👍"
       redirect_to home_path
     else
-      flash[:danger] = "Unfortunately 🙈, your message didn't approve our moral politics and other validation. See agreements"
+      flash.now[:dark] = "Unfortunately 🙈, your message didn't approve our moral politics and other validation. See agreements"
     end
   end
 
