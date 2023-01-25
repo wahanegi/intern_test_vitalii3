@@ -76,7 +76,10 @@ end
 # DEVISE:
 gem "devise"
 #FOR HANDLING IMAGES:
-# gem
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem "mini_magick", ">= 3.6.0"
+gem  'fog', '>=1.36.0'
+
 #FOR FILLING MESSAGES DATA:
 # gem
 

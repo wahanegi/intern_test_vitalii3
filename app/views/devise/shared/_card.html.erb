@@ -9,6 +9,9 @@
   </section>
   <span> <%= "@#{seek_user(object.user_id).name}-#{seek_user(object.user_id).email}}" %> | </span>
   <span>Posted <%= distance_of_time_in_words_to_now(object.created_at)%> ago</span>
-  <div class="posted_message"><%= object.content%></div>
+  <div class="posted_message">
+    <%= object.content%>
+    <%= image_tag object.picture.url if object.picture? %>
+  </div>
 </li>
 

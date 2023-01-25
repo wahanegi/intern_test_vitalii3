@@ -19,4 +19,12 @@
   <div class="but_input">
     <%= f.submit%>
   </div>
+  <div class="picture">
+    <%= f.file_field :picture , accept: 'image/jpeg,image/gif,image/png' %>
+  </div>
+
+  <% content_for :head do %>
+    <%= javascript_import_module_tag "cut_image" %>
+  <% end %>
+
 <% end %>
