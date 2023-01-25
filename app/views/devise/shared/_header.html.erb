@@ -3,8 +3,8 @@
 
 <% if current_user.nil? %>
 
-      <%= button_to "SIGN IN", "/users/sign_in", class: "button_menu" %>
-      <%= button_to "SIGN UP", "/users/sign_up", class: "button_menu1"  %>
+      <%= button_to "SIGN IN", "/users/sign_in", method: :get, class: "button_menu" %>
+      <%= button_to "SIGN UP", "/users/sign_up", method: :get, class: "button_menu1"  %>
 <% else %>
       <%= button_to "LOG OUT", destroy_user_session_path(), method: :delete, class: "button_menu" %>
       <%= button_to "NEW MESSAGE", new_posted_message_path, method: :get, class: "button_menu1"  %>

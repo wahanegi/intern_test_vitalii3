@@ -328,7 +328,7 @@ aside section h1 {
 }
 .road{
     position: relative;
-    width:60%;
+    width:min-content;
     margin:0 auto;
 }
 
