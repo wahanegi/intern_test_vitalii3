@@ -82,7 +82,7 @@ span{
     display: block;
     //position:absolute;
     top: 10vh;
-    width: auto;
+    width: min-content;
     height: auto;
     //padding: 0;
     right:37% ;
