@@ -79,3 +79,6 @@ gem "devise"
 # gem
 #FOR FILLING MESSAGES DATA:
 # gem
+
+# Filling database with virtual users
+gem 'faker', '>=1.4.2'

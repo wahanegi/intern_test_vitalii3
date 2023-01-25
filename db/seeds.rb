@@ -7,50 +7,44 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-PostedMessage.create( [{user_id: "1",
-                        created_at: "2023-01-22 20:45:40",
-                        content: "Today I see something strange 🤨. But when I come a near that place was nothing - this is be illusion 🤣"},
-                       {user_id: "2",
-                        created_at: "2023-01-22 20:46:37",
-                        content: "Today I see something strange 🤨. But when I come a near that place I saw @viktor_1967 🤣"},
-                       {user_id: "3",
-                        created_at: "2023-01-22 22:10:49",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "4",
-                        created_at: "2023-01-22 22:10:50",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "5",
-                        created_at: "2023-01-22 22:11:50",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "6",
-                        created_at: "2023-01-22 22:12:00",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "7",
-                        created_at: "2023-01-22 22:12:01",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "",
-                        created_at: "2023-01-22 22:12:02",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "9",
-                        created_at: "2023-01-22 22:12:04",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "10",
-                        created_at: "2023-01-22 22:12:05",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "11",
-                        created_at: "2023-01-22 22:12:10",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "12",
-                        created_at: "2023-01-22 22:12:16",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "13",
-                        created_at: "2023-01-22 23:53:12",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"},
-                       {user_id: "14",
-                        created_at: "2023-01-22 23:54:16",
-                        content: "This message was create automatically. Length of this message will be maximum 255 symbols because it relative from features database field content and certainly from conditions which describing in the model. TExt will be lost whic"}
-                      ])
+names = []
+
+16.times do |n|
+  names[n] = Faker::Name.name
+  name = names[n]
+
+  email = "email#{n+1}@test.org"
+  password = "Pas$w0rd"
+  User.create!(name: name,
+               email: email,
+               password:
+                 password,
+               password_confirmation: password,
+               confirmed_at: Time.zone.now)
+end
+#Добавление микросообщений в тестовые данные
+users = User.order(:created_at).take(6)
+n=0
+14.times do
+  n=n+1
+  time = ( Time.zone.now - 140.minutes + (n*10).minutes )
+  content = Faker::Lorem.sentence(word_count: 5)
+  users.each { |user| user.posted_message.create!(content: content, created_at: time) }
+end
+PostedMessage.create( [{user_id: "15",
+                        created_at: Time.zone.now,
+                        content: "Today I saw something strange 🤨. But when I come a near that place was nothing - this was an illusion 🤷"},
+                       {user_id: "16",
+                        created_at: Time.zone.now,
+                        content: "Today I saw something strange 🤨. But when I come a near that place I saw @#{names[14]} 🤣"}])
 
 
+  User.create!(name: "Steve Jobs",
+               email: "Steve_Jobs@apple.com",
+               password: "Pas$w0rd",
+               password_confirmation: "Pas$w0rd",
+               confirmed_at: Time.zone.now)
 
-
+PostedMessage.create( [{user_id: "17",
+                        created_at: Time.zone.now,
+                        content: "«The only way to do great work is to love what you do. If you have not found it yet, keep looking. Do not settle»"}])

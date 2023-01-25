@@ -287,6 +287,7 @@ aside section h1 {
 }
 .posted_message {
     margin-left: 150px;
+    font-size: xx-large;
 }
 .posted_message .content p{
     margin-inline-start: 60px;
