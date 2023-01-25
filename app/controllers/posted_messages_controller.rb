@@ -16,6 +16,7 @@ class PostedMessagesController < ApplicationController
       redirect_to home_path
     else
       flash.now[:dark] = "Unfortunately 🙈, your message didn't approve our moral politics and other validation. See agreements"
+      respond_err_with_json @message
     end
   end
 
