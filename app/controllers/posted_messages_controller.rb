@@ -28,5 +28,6 @@ class PostedMessagesController < ApplicationController
     params.require(:posted_message).permit(:content)
   end
   def authenticate
+    !current_user.nil?
   end
 end

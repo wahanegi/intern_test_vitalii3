@@ -1,4 +1,5 @@
 <% provide(:title, "NEW MESSAGE") %>
+<% unless current_user.nil? %>
 <div class="wrapper">
   <h2 text-align="center">NEW MESSAGE</h2>
   <div class="cover">
@@ -12,3 +13,6 @@
 </div>
   </div>
 </div>
+  <% else %>
+
+<% end %>

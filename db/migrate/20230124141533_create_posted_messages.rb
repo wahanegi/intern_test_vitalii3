@@ -1,7 +1,7 @@
 class CreatePostedMessages < ActiveRecord::Migration[7.0]
   def change
     create_table :posted_messages do |t|
-      t.string :content
+      t.text :content
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

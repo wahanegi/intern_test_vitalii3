@@ -14,9 +14,7 @@ class User < ApplicationRecord
   end
 
   # finding information about user
-  def seek_user(id)
-    User.find(id)
-  end
+
 
   def confirmed?
     !confirmed_at.nil?
