@@ -69,3 +69,9 @@ yarn-debug.log*
 # Ignore Rubymine files
 .idea/
 .idea*
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Пропуск загруженных тестовых изображений.
+/public/uploads
