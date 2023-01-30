@@ -119,6 +119,7 @@ span{
     border-radius: 15px;
     font-weight: 200;
     transition: .3s;
+    /*font-size: 2em;*/
 }
 .button:hover, .button_menu:hover, .button_logout:hover, .button_menu1:hover{
     background-color: #00afff;
@@ -126,13 +127,21 @@ span{
 }
 
 #error_explanation{
-display:block;
-//height:7vh;
+    display:block;
     color:red;
     font-weight: bold;
     list-style: none;
     margin:0;
     padding:0;
+}
+#error_explanation_react{
+    display:block;
+    color:red;
+    font-weight: bold;
+    list-style: none;
+    margin:0;
+    padding:0;
+    white-space: pre-wrap;
 }
 .field{
     display: block;
@@ -154,9 +163,10 @@ input{
 
 label{
     font-size: larger;
+    text-transform: capitalize;
 }
 
-.container{
+#container{
     width:97%;
     height: 0;
     font-weight: bold;
@@ -395,6 +405,30 @@ aside section h1 {
 .trix-content h1{
     padding-bottom: inherit;
     line-height: 1em;
+}
+/*#####################*/
+.invalid {
+    border: 1px solid red;
+    background-color: #fddddd;
+}
+.invalid:focus {
+    border-color: #ff8800;
+    background-color: #fbe8d0;
+}
+
+.button{
+    font-size: 2em;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active{
+    background-color: #ccc;
+    box-shadow: 0 0 0 0 #ccc;
+    border-color: #ccc;
+    transition: 0s;
+    font-weight: 200;
+    cursor: not-allowed;
 }
 
 

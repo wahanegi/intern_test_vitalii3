@@ -1086,7 +1086,7 @@
             }
             return element;
           };
-          function createElement3(type, config, children) {
+          function createElement4(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -1660,7 +1660,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState4(initialState) {
+          function useState6(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1672,7 +1672,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect4(create, deps) {
+          function useEffect6(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2185,7 +2185,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement3.apply(this, arguments);
+            var element = createElement4.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -2454,7 +2454,7 @@
           exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect4;
+          exports.useEffect = useEffect6;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2462,7 +2462,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
           exports.useRef = useRef3;
-          exports.useState = useState4;
+          exports.useState = useState6;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React6 = require_react();
+          var React13 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React13.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React6.Children.forEach(props.children, function(child) {
+                  React13.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -9964,7 +9964,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -10825,7 +10825,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React6.Component().refs;
+          var emptyRefsObject = new React13.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react3 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react2 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React2 = __toESM(require_react());
@@ -31420,18 +31420,195 @@
   };
   var Home_default = Home;
 
+  // app/javascript/components/Pages/Login.jsx
+  var import_react8 = __toESM(require_react());
+
+  // app/javascript/components/forms/Forms.jsx
+  var import_react5 = __toESM(require_react());
+
+  // app/javascript/components/Wrappers/MainWrapper.jsx
+  var import_react2 = __toESM(require_react());
+
+  // app/javascript/components/icons/IconReact.jsx
+  var React4 = __toESM(require_react());
+  function IconReact(props) {
+    return /* @__PURE__ */ React4.createElement(
+      "svg",
+      {
+        viewBox: "0 0 34 32",
+        fill: "currentColor",
+        height: "1em",
+        width: "1em",
+        ...props
+      },
+      /* @__PURE__ */ React4.createElement(
+        "path",
+        {
+          fill: "currentColor",
+          d: "M19.314 15.987a2.392 2.392 0 11-4.784 0 2.392 2.392 0 014.784 0z"
+        }
+      ),
+      /* @__PURE__ */ React4.createElement(
+        "path",
+        {
+          fill: "currentColor",
+          d: "M16.922 24.783c1.878 1.826 3.729 2.906 5.221 2.906.489 0 .952-.103 1.337-.334 1.337-.772 1.826-2.701 1.363-5.453-.077-.489-.18-.977-.309-1.492.514-.154.977-.309 1.44-.463 2.598-1.003 4.038-2.392 4.038-3.909 0-1.543-1.44-2.932-4.038-3.909-.463-.18-.926-.334-1.44-.463.129-.514.232-1.003.309-1.492.437-2.803-.051-4.758-1.389-5.53-.386-.231-.849-.334-1.337-.334-1.466 0-3.344 1.08-5.221 2.906-1.852-1.826-3.704-2.906-5.195-2.906-.489 0-.952.103-1.337.334-1.337.772-1.826 2.701-1.363 5.453.077.489.18.977.309 1.492-.514.154-.977.309-1.44.463-2.598 1.003-4.038 2.392-4.038 3.909 0 1.543 1.44 2.932 4.038 3.909.463.18.926.334 1.44.463a16.882 16.882 0 00-.309 1.492c-.437 2.752.051 4.707 1.363 5.453.386.232.849.334 1.337.334 1.492.051 3.344-1.029 5.221-2.829zm-1.441-3.472c.463.026.952.026 1.44.026s.977 0 1.44-.026a24.523 24.523 0 01-1.44 1.723 24.252 24.252 0 01-1.44-1.723zm-3.189-2.649c.257.437.489.849.772 1.26a27.786 27.786 0 01-2.263-.386c.232-.694.489-1.415.797-2.135.206.411.437.849.694 1.26zM10.8 12.463c.72-.154 1.466-.283 2.263-.386-.257.412-.514.823-.772 1.26s-.489.849-.694 1.286a17.109 17.109 0 01-.797-2.161zm1.415 3.524c.334-.694.694-1.389 1.106-2.083.386-.669.823-1.337 1.26-2.006a35.293 35.293 0 014.682 0c.463.669.874 1.337 1.26 2.006.412.694.772 1.389 1.106 2.083a26.922 26.922 0 01-1.106 2.083c-.386.669-.823 1.337-1.26 2.006a35.293 35.293 0 01-4.682 0 28.695 28.695 0 01-1.26-2.006 27.106 27.106 0 01-1.106-2.083zm10.057-1.389l-.694-1.286c-.257-.437-.489-.849-.772-1.26.797.103 1.543.232 2.263.386-.231.72-.489 1.44-.797 2.161zm0 2.778c.309.72.566 1.44.797 2.135-.72.154-1.466.283-2.263.386.257-.412.514-.823.772-1.26.232-.386.463-.823.694-1.26zm.591 8.925c-.206.129-.463.18-.746.18-1.26 0-2.829-1.029-4.372-2.572a26.868 26.868 0 002.186-2.701 23.619 23.619 0 003.447-.54c.129.463.206.926.283 1.389.36 2.186.077 3.755-.797 4.244zm1.338-13.555c2.881.823 4.604 2.083 4.604 3.241 0 1.003-1.183 2.006-3.266 2.804-.412.154-.874.309-1.337.437a27.01 27.01 0 00-1.26-3.241c.514-1.106.952-2.186 1.26-3.241zm-2.058-7.253c.283 0 .514.051.746.18.849.489 1.157 2.032.797 4.244-.077.437-.18.9-.283 1.389a33.072 33.072 0 00-3.447-.54 23.774 23.774 0 00-2.186-2.701c1.543-1.518 3.112-2.572 4.372-2.572zm-3.781 5.17c-.463-.026-.952-.026-1.44-.026s-.977 0-1.44.026c.463-.617.952-1.183 1.44-1.723.489.54.977 1.132 1.44 1.723zm-7.382-4.99c.206-.129.463-.18.746-.18 1.26 0 2.829 1.029 4.372 2.572a26.756 26.756 0 00-2.186 2.701 23.619 23.619 0 00-3.447.54c-.129-.463-.206-.926-.283-1.389-.36-2.186-.077-3.729.797-4.244zM9.643 19.228c-2.881-.823-4.604-2.083-4.604-3.241 0-1.003 1.183-2.006 3.266-2.803.412-.154.874-.309 1.337-.437a27.01 27.01 0 001.26 3.241c-.514 1.106-.952 2.212-1.26 3.241zm.54 2.829c.077-.437.18-.9.283-1.389 1.08.232 2.238.412 3.447.54a23.774 23.774 0 002.186 2.701c-1.543 1.517-3.112 2.572-4.372 2.572-.283 0-.514-.051-.746-.18-.875-.489-1.157-2.058-.797-4.244z"
+        }
+      )
+    );
+  }
+  var IconReact_default = IconReact;
+
+  // app/javascript/components/Wrappers/MainWrapper.jsx
+  var MainWrapper = (props) => {
+    return /* @__PURE__ */ import_react2.default.createElement("div", { className: "wrapper" }, /* @__PURE__ */ import_react2.default.createElement("h2", null, props.chapter, /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), /* @__PURE__ */ import_react2.default.createElement("div", { className: "cover" }, props.children));
+  };
+  var MainWrapper_default = MainWrapper;
+
+  // app/javascript/components/Wrappers/FieldInput.jsx
+  var import_react4 = __toESM(require_react());
+
+  // app/javascript/components/hooks/use-input.jsx
+  var import_react3 = __toESM(require_react());
+  var UseInput = (validateValue) => {
+    const [valueEntered, setValueEntered] = (0, import_react3.useState)("");
+    const [isTouched, setIsTouched] = (0, import_react3.useState)(false);
+    const valueIsValid = validateValue(valueEntered);
+    const hasError = !valueIsValid && isTouched;
+    const valueChangeInputHandler = (event) => {
+      setValueEntered(event.target.value);
+    };
+    const blurHandler = (event) => {
+      setIsTouched(true);
+    };
+    const reset = () => {
+      setValueEntered("");
+      setIsTouched(false);
+    };
+    return {
+      value: valueEntered,
+      isValid: valueIsValid,
+      hasError,
+      valueChangeInputHandler,
+      blurHandler,
+      reset
+    };
+  };
+  var use_input_default = UseInput;
+
+  // app/javascript/components/Wrappers/FieldInput.jsx
+  var FieldInput = (props) => {
+    const {
+      value: valueEntered,
+      isValid: valueIsValid,
+      hasError: thisInputHasError,
+      valueChangeInputHandler,
+      blurHandler,
+      reset: resetInput
+    } = use_input_default(props.cond);
+    (0, import_react4.useEffect)(() => {
+      props.data({
+        value: valueEntered,
+        hasError: thisInputHasError,
+        isValid: valueIsValid,
+        reset: resetInput
+      });
+    }, [thisInputHasError, valueEntered, valueIsValid]);
+    const inputClasses = thisInputHasError ? "invalid" : "";
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "field" }, /* @__PURE__ */ import_react4.default.createElement("label", { htmlFor: props.label, className: "label" }, props.label), /* @__PURE__ */ import_react4.default.createElement("br", null), /* @__PURE__ */ import_react4.default.createElement(
+      "input",
+      {
+        type: props.type,
+        className: inputClasses,
+        onChange: valueChangeInputHandler,
+        onBlur: blurHandler,
+        value: valueEntered,
+        autoComplete: props.label
+      }
+    ), thisInputHasError && /* @__PURE__ */ import_react4.default.createElement("p", { id: "error_explanation_react" }, props.label, " ", props.err));
+  };
+  var FieldInput_default = FieldInput;
+
+  // app/javascript/components/forms/Forms.jsx
+  var import_react6 = __toESM(require_react());
+  var Forms = (props) => {
+    const [formData, setFormData] = (0, import_react6.useState)({ isValid: true, data: {} });
+    const [enteredName, setEnteredName] = (0, import_react6.useState)({});
+    const [enteredEmail, setEnteredEmail] = (0, import_react6.useState)({});
+    const [enteredPsw, setEnteredPsw] = (0, import_react6.useState)({});
+    const [enteredPswCnf, setEnteredPswCnf] = (0, import_react6.useState)({});
+    const [fields, setFields] = (0, import_react6.useState)(4);
+    const nameCond = (value) => value.trim() !== "" && value.length > 1 && value.length < 20;
+    const errName = "can't be empty or less 2 chars and more 20 chars";
+    const emailCond = (value) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
+    const errEmail = "can't be empty and must be really";
+    const pswCond = (value) => value.trim() !== "" && value.length > 5 && value.length < 128;
+    const errPsw = "can't be empty and must be \nhave minimum 6 chars and equal to password";
+    (0, import_react5.useEffect)(() => {
+      setFields(props.howFields * 1);
+    });
+    const formSubmissionHandler = (event) => {
+      event.preventDefault();
+      props.action(formData.data);
+    };
+    (0, import_react5.useEffect)(() => {
+      if ((fields !== 4 || enteredName.isValid) && (fields !== 1 && fields !== 2 && fields !== 4 || enteredEmail.isValid) && (fields % 2 && fields % 3 || enteredPsw.isValid) && (fields !== 4 && fields !== 3 || enteredPswCnf.isValid)) {
+        setFormData({ isValid: true, data: {
+          name: enteredName.value,
+          email: enteredEmail.value,
+          password: enteredPsw.value,
+          password_confirmation: enteredPswCnf.value,
+          return_secure_token: true
+        } });
+      } else {
+        setFormData({ isValid: false, data: {} });
+      }
+    }, [enteredName, enteredEmail, enteredPswCnf, enteredPsw]);
+    const nameData = (obj) => {
+      setEnteredName(obj);
+    };
+    const emailData = (obj) => {
+      setEnteredEmail(obj);
+    };
+    const pswData = (obj) => {
+      setEnteredPsw(obj);
+    };
+    const pswCnfData = (obj) => {
+      setEnteredPswCnf(obj);
+    };
+    return /* @__PURE__ */ import_react5.default.createElement(MainWrapper_default, { chapter: props.title }, /* @__PURE__ */ import_react5.default.createElement("form", { onSubmit: formSubmissionHandler }, fields === 4 && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "name", type: "text", data: nameData, cond: nameCond, err: errName }), (fields === 4 || fields === 2 || fields === 1) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "email", type: "email", data: emailData, cond: emailCond, err: errEmail }), (fields === 4 || fields === 2 || fields === 3) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "password", type: "password", data: pswData, cond: pswCond, err: errPsw }), (fields === 4 || fields === 3) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "password confirmation", type: "password", data: pswCnfData, cond: pswCond, err: errPsw }), /* @__PURE__ */ import_react5.default.createElement("button", { className: "button", disabled: !formData.isValid }, props.wrtOnBtn || "Submit"), props.children));
+  };
+  var Forms_default = Forms;
+
+  // app/javascript/components/forms/Links.jsx
+  var import_react7 = __toESM(require_react());
+  var Links = (props) => {
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "links" }, props.form !== "Login" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/login" }, "LOGIN")), props.form !== "Registrations" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/registration" }, "SIGN UP")), props.form !== "ForgotPassword" && props.form !== "Registrations" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/forgot_password" }, "Forgot your password?")), props.form !== "ResendInstruction" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/resend_instruction" }, "Didn't receive confirmation instructions?")));
+  };
+  var Links_default = Links;
+
+  // app/javascript/components/Pages/Login.jsx
+  var Login = () => {
+    const sendData = (data) => {
+      console.log(data);
+    };
+    return /* @__PURE__ */ import_react8.default.createElement(Forms_default, { howFields: "2", title: "Login", wrtOnBtn: "It's my account", action: sendData }, /* @__PURE__ */ import_react8.default.createElement(Links_default, { form: "Login" }));
+  };
+  var Login_default = Login;
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react2.default.createElement(Home_default, null) }
+    { path: "/", element: /* @__PURE__ */ import_react9.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react9.default.createElement(Login_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react2.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react9.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react3.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react10.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 
