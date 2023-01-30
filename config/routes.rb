@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get  "posted_message" => "posted_messages#show"
   post "posted_messages" => "posted_messages#create"
   get "home" => "static_pages#home"
+  get "json" => "api#json"
   get "*path" => "static_pages#home"
   root "static_pages#home"
 
