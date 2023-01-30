@@ -1,5 +1,6 @@
 {
   "name": "intern_test_vitalii3",
+  "description": "a really cool app",
   "version": "1.0.0",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
@@ -12,5 +13,9 @@
   "scripts": {
     "build": "esbuild --bundle app/javascript/application.js --outfile=app/assets/javascript/application.js",
     "watch": "esbuild --watch --bundle app/javascript/application.js --outfile=app/assets/javascript/application.js"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "9.x"
   }
 }
