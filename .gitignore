@@ -75,3 +75,5 @@ yarn-debug.log*
 
 # Пропуск загруженных тестовых изображений.
 /public/uploads
+
+./public
