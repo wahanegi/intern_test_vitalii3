@@ -1664,7 +1664,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
-          function useReducer(reducer, initialArg, init) {
+          function useReducer2(reducer, initialArg, init) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
@@ -1684,7 +1684,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback3(callback, deps) {
+          function useCallback4(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -2450,7 +2450,7 @@
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback3;
+          exports.useCallback = useCallback4;
           exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
@@ -2460,7 +2460,7 @@
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect4;
           exports.useMemo = useMemo3;
-          exports.useReducer = useReducer;
+          exports.useReducer = useReducer2;
           exports.useRef = useRef3;
           exports.useState = useState6;
           exports.useSyncExternalStore = useSyncExternalStore2;
@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React13 = require_react();
+          var React16 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React13.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React13.Children.forEach(props.children, function(child) {
+                  React16.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React13.Component().refs;
+          var emptyRefsObject = new React16.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react10 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react9 = __toESM(require_react());
+  var import_react12 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React2 = __toESM(require_react());
@@ -31596,19 +31596,147 @@
   };
   var Login_default = Login;
 
+  // app/javascript/components/Pages/Registrations.jsx
+  var import_react11 = __toESM(require_react());
+
+  // app/javascript/components/hooks/use-http.jsx
+  var import_react9 = __toESM(require_react());
+
+  // app/javascript/components/helper_function/flash.jsx
+  function flash(type, data) {
+    const main = document.querySelector("#container > div");
+    main !== null ? main.remove() : "";
+    const currentDiv = document.getElementById("container");
+    const newDiv = document.createElement("div");
+    newDiv.className = "alert alert-" + type;
+    const newContent = document.createTextNode(data);
+    newDiv.appendChild(newContent);
+    currentDiv.append(newDiv);
+    currentDiv.style.opacity = "1";
+    currentDiv.style.height = "auto";
+    setTimeout(() => {
+      currentDiv.style.opacity = "0";
+      currentDiv.style.height = "0";
+    }, 1e4);
+  }
+
+  // app/javascript/components/hooks/use-http.jsx
+  function httpReducer(state, action) {
+    if (action.type === "SEND") {
+      return {
+        data: null,
+        error: null,
+        status: "pending"
+      };
+    }
+    if (action.type === "SUCCESS") {
+      if (action.responseData.info["notice"] !== void 0) {
+        flash("notice", action.responseData.info["notice"]);
+      } else if (action.responseData.info["danger"] !== void 0) {
+        flash("danger", action.responseData.info["danger"]);
+      }
+      return {
+        data: action.responseData,
+        error: null,
+        status: "completed"
+      };
+    }
+    if (action.type === "ERROR") {
+      return {
+        data: null,
+        error: action.errorMessage,
+        status: "completed"
+      };
+    }
+    return state;
+  }
+  function useHttp(requestFunction, startWithPending = false) {
+    const [httpState, dispatch2] = (0, import_react9.useReducer)(httpReducer, {
+      status: startWithPending ? "pending" : null,
+      data: null,
+      error: null
+    });
+    const sendRequest = (0, import_react9.useCallback)(
+      async function(requestData) {
+        dispatch2({ type: "SEND" });
+        try {
+          const responseData = await requestFunction(requestData);
+          dispatch2({ type: "SUCCESS", responseData });
+        } catch (error) {
+          dispatch2({
+            type: "ERROR",
+            errorMessage: error.message || "Something went wrong!"
+          });
+        }
+      },
+      [requestFunction]
+    );
+    return {
+      sendRequest,
+      ...httpState
+    };
+  }
+  var use_http_default = useHttp;
+
+  // app/javascript/components/lib/api.jsx
+  var import_react10 = __toESM(require_react());
+  var domain = "http://localhost:3000";
+  var csrf_token = document.getElementsByName("csrf-token")[0].getAttribute("content");
+  var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
+  async function requests_answers(sData) {
+    sData.dataUser[csrf_param] = csrf_token;
+    const responce = await fetch(
+      `${domain}${sData.url}`,
+      {
+        "method": sData.method,
+        "mode": "cors",
+        "cache": "no-cache",
+        "credentials": "same-origin",
+        "body": JSON.stringify(sData.dataUser),
+        "headers": { "Content-type": "application/json" }
+      }
+    );
+    const data = await responce.json();
+    if (!responce.ok) {
+      throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
+    }
+    return { "info": data };
+  }
+
+  // app/javascript/components/Pages/Registrations.jsx
+  var Registrations = () => {
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const sendData = (data2) => {
+      sendRequest(
+        {
+          dataUser: { user: data2 },
+          url: "/users",
+          method: "POST"
+        }
+      );
+    };
+    if (status === "completed" && data.info["danger"] === void 0) {
+      return /* @__PURE__ */ import_react11.default.createElement(Home_default, null);
+    }
+    return /* @__PURE__ */ import_react11.default.createElement(Forms_default, { howFields: "4", title: "Sign Up", wrtOnBtn: "Want Account", action: sendData }, /* @__PURE__ */ import_react11.default.createElement(Links_default, { form: "Registrations" }));
+  };
+  var Registrations_default = Registrations;
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react9.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react9.default.createElement(Login_default, null) }
+    { path: "/", element: /* @__PURE__ */ import_react12.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react12.default.createElement(Login_default, null) },
+    { path: "/logout", element: "" },
+    { path: "/registration", element: /* @__PURE__ */ import_react12.default.createElement(Registrations_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react9.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react12.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react10.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react13.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 

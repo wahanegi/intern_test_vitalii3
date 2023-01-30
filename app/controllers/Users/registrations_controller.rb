@@ -16,12 +16,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.create( sign_up_params )
     info ="Thanks for registration. Please verify your post and activate your new account"
-    @user.save ?
-      success_respond_with_json(home_path, info)
-      : respond_err_with_json(@user)
+    if resource_params['return_secure_token']
+      if @user.save
+        render :json =>{ notice: info }
+      else
+        m=[]
+        (@user.errors.messages.each { |key, value|  m.push(" #{key} #{value[0]}\n") })
+        # debugger
+        render :json => {danger: m.join(' ')}
+      end
+    else
+      @user.save ?
+        success_respond_with_json(home_path, info)
+        : respond_err_with_json(@user)
+    end
+
   end
-
-
   # GET /resource/edit
   def edit
 
