@@ -392,8 +392,9 @@ aside section h1 {
 #posted_message_picture{
     color: #730E15;
 }
-.trix-content {
+.trix-content h1{
     padding-bottom: inherit;
+    line-height: 1em;
 }
 
 
