@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React16 = require_react();
+          var React19 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React16.Children.forEach(props.children, function(child) {
+                  React19.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React16.Component().refs;
+          var emptyRefsObject = new React19.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react13 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react12 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React2 = __toESM(require_react());
@@ -31722,21 +31722,67 @@
   };
   var Registrations_default = Registrations;
 
+  // app/javascript/components/Pages/ResendInstruction.jsx
+  var import_react12 = __toESM(require_react());
+  var ResendInstruction = () => {
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const sendData = (data2) => {
+      sendRequest(
+        {
+          dataUser: { user: data2 },
+          url: "/users/confirmation",
+          method: "POST"
+        }
+      );
+    };
+    if (status === "completed" && data.info["danger"] === void 0) {
+      return /* @__PURE__ */ import_react12.default.createElement(Home_default, null);
+    }
+    return /* @__PURE__ */ import_react12.default.createElement(
+      Forms_default,
+      {
+        howFields: "1",
+        title: "Resend confirmation instruction",
+        wrtOnBtn: "Get instruction again",
+        action: sendData
+      },
+      /* @__PURE__ */ import_react12.default.createElement(Links_default, { form: "ResendInstruction" })
+    );
+  };
+  var ResendInstruction_default = ResendInstruction;
+
+  // app/javascript/components/Pages/ResetPassword.jsx
+  var import_react13 = __toESM(require_react());
+  var ResetPassword = () => {
+    return /* @__PURE__ */ import_react13.default.createElement(Forms_default, { howFields: "3", title: "Reset your password", wrtOnBtn: "Create new password" }, /* @__PURE__ */ import_react13.default.createElement(Links_default, { form: "ResetPassword" }));
+  };
+  var ResetPassword_default = ResetPassword;
+
+  // app/javascript/components/Pages/ForgotPassword.jsx
+  var import_react14 = __toESM(require_react());
+  var ForgotPassword = () => {
+    return /* @__PURE__ */ import_react14.default.createElement(Forms_default, { howFields: "1", title: "Forgot your password?", wrtOnBtn: "Get instruction to reset password" }, /* @__PURE__ */ import_react14.default.createElement(Links_default, { form: "ForgotPassword" }));
+  };
+  var ForgotPassword_default = ForgotPassword;
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react12.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react12.default.createElement(Login_default, null) },
+    { path: "/", element: /* @__PURE__ */ import_react15.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react15.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/registration", element: /* @__PURE__ */ import_react12.default.createElement(Registrations_default, null) }
+    { path: "/registration", element: /* @__PURE__ */ import_react15.default.createElement(Registrations_default, null) },
+    { path: "/forgot_password", element: /* @__PURE__ */ import_react15.default.createElement(ForgotPassword_default, null) },
+    { path: "/reset_password", element: /* @__PURE__ */ import_react15.default.createElement(ResetPassword_default, null) },
+    { path: "/resend_instruction", element: /* @__PURE__ */ import_react15.default.createElement(ResendInstruction_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react12.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react15.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react13.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react16.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 
