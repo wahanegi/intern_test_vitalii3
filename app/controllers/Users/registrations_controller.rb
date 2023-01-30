@@ -32,6 +32,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
   end
+
+
   # GET /resource/edit
   def edit
 
@@ -41,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     info="Information in your account was changed successfully"
     @user = User.update( account_update_params ) ?
-              success_respond_with_json(home_path,info)
+              success_respond_with_json(home_path,info,)
               : respond_err_with_json(@user)
   end
 

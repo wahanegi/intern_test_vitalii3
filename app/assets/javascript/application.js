@@ -31695,22 +31695,28 @@
   var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
   async function requests_answers(sData) {
     sData.dataUser[csrf_param] = csrf_token;
-    const responce = await fetch(
-      `${domain}${sData.url}`,
-      {
-        "method": sData.method,
-        "mode": "cors",
-        "cache": "no-cache",
-        "credentials": "same-origin",
-        "body": JSON.stringify(sData.dataUser),
-        "headers": { "Content-type": "application/json" }
+    try {
+      const responce = await fetch(
+        `${domain}${sData.url}`,
+        {
+          "method": sData.method,
+          "mode": "cors",
+          "cache": "no-cache",
+          "credentials": "same-origin",
+          "body": JSON.stringify(sData.dataUser),
+          "headers": { "Content-type": "application/json" }
+        }
+      );
+      const data = await responce.json();
+      console.log(data);
+      if (!responce.ok) {
+        throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
       }
-    );
-    const data = await responce.json();
-    if (!responce.ok) {
-      throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
+      return { "info": data };
+    } catch (e) {
+      console.log(e.message);
+      flash("danger", e.message);
     }
-    return { "info": data };
   }
 
   // app/javascript/components/Pages/Login.jsx

@@ -18,15 +18,29 @@ class Users::SessionsController < Devise::SessionsController
     password_valid = (@user = User.find_by(email: sign_in_params[:email])) ?
                        @user.valid_password?(sign_in_params[:password])
                        : false
-
+    debugger
     if  @user && password_valid && @user.confirmed?
-      flash[:notice] = "Welcome to our GIGGLE-💪I🤫🤣🦶👍. Now you can to create own like-twitter-messages(only funny) and divide it with your friends"
-      user_signed_in? ## help for protect and allow to entrance after login
-      redirect_to home_path
+      info = "Welcome to our GIGGLE-💪I🤫🤣🦶👍. Now you can to create own like-twitter-messages(only funny) and divide it with your friends"
+      flash[:notice] = info
+      #if current_user render :json => {notice: "You are logged!", login: true}
+      # TODO instead of value of token ('9fioejwihr0gj9uiep') need to use function to create digest
+      # and save it in DB
+      render :json => {notice: info,
+                       login: true,
+                       token: '9fioejwihr0gj9uiep'} if params[:user][:return_secure_token]
+      redirect_to home_path unless params[:user][:return_secure_token]
     else
-      @user && password_valid ?
-        redirect_to( user_session_path, notice: " Account not activated 😳. Please verify letter activation on your email or resend confirm instruction🔄" )
-        : redirect_to( user_session_path, dark: " YOUR EMAIL and PASSWORD ARE WRONG. PLEASE TYPE IT CORRECTLY" )
+      notice = " Account not activated 😳. Please verify letter activation on your email or resend confirm instruction🔄"
+      dark = " YOUR EMAIL and PASSWORD ARE WRONG. PLEASE TYPE IT CORRECTLY"
+      if params[:user][:return_secure_token]
+        @user && password_valid ?
+          render(:json => {notice: notice})
+          : render(:json => {danger: dark})
+      else
+        @user && password_valid ?
+          redirect_to( user_session_path, notice: notice)
+          : redirect_to( user_session_path, dark: dark)
+      end
     end
   end
 

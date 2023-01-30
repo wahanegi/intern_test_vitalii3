@@ -26,9 +26,9 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       else
         flash[:danger] = info
       redirect_to new_user_registration_path
+      end
     end
-    end
-    end
+  end
 
   # GET /resource/confirmation?confirmation_token=abcdef
   # def show
