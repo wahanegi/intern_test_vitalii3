@@ -4,6 +4,7 @@ import Links from "../forms/Links";
 import useHttp from "../hooks/use-http";
 import {registrations, requests_answers} from "../lib/api";
 import Home from "./Home";
+import Header from "../Wrappers/Header";
 
 const Registrations = () => {
     // const {sendRequest, status, error} = useHttp(registrations)
@@ -24,9 +25,11 @@ const Registrations = () => {
         return <Home/>
     }
     return (
+        <Header>
         <Forms howFields='4' title="Sign Up" wrtOnBtn="Want Account" action={sendData}>
             <Links form="Registrations"/>
         </Forms>
+        </Header>
     );
 };
 

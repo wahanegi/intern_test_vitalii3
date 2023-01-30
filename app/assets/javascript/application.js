@@ -1646,7 +1646,7 @@
             }
             return dispatcher;
           }
-          function useContext3(Context) {
+          function useContext5(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1660,7 +1660,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState6(initialState) {
+          function useState7(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1672,7 +1672,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect6(create, deps) {
+          function useEffect7(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2451,10 +2451,10 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback4;
-          exports.useContext = useContext3;
+          exports.useContext = useContext5;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect6;
+          exports.useEffect = useEffect7;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2462,7 +2462,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
-          exports.useState = useState6;
+          exports.useState = useState7;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React19 = require_react();
+          var React21 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React19.Children.forEach(props.children, function(child) {
+                  React21.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React19.Component().refs;
+          var emptyRefsObject = new React21.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react16 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react15 = __toESM(require_react());
+  var import_react17 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React2 = __toESM(require_react());
@@ -31414,20 +31414,22 @@
   }
 
   // app/javascript/components/Pages/Home.jsx
-  var import_react = __toESM(require_react());
-  var Home = () => {
-    return /* @__PURE__ */ import_react.default.createElement("h1", null, "THIS IS HOME PAGE CREATED REACT LIBRARY");
-  };
-  var Home_default = Home;
+  var import_react3 = __toESM(require_react());
 
-  // app/javascript/components/Pages/Login.jsx
-  var import_react8 = __toESM(require_react());
-
-  // app/javascript/components/forms/Forms.jsx
-  var import_react5 = __toESM(require_react());
-
-  // app/javascript/components/Wrappers/MainWrapper.jsx
+  // app/javascript/components/Wrappers/Header.jsx
   var import_react2 = __toESM(require_react());
+
+  // app/javascript/components/store/login-context.jsx
+  var import_react = __toESM(require_react());
+  var LoginContext = import_react.default.createContext({
+    token: "",
+    isLoggedIn: false,
+    login: () => {
+    },
+    logout: () => {
+    }
+  });
+  var login_context_default = LoginContext;
 
   // app/javascript/components/icons/IconReact.jsx
   var React4 = __toESM(require_react());
@@ -31459,20 +31461,40 @@
   }
   var IconReact_default = IconReact;
 
+  // app/javascript/components/Wrappers/Header.jsx
+  var Header = (props) => {
+    const loginContext = (0, import_react2.useContext)(login_context_default);
+    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("div", { className: "lower-header" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "list-of-links" }, /* @__PURE__ */ import_react2.default.createElement("ul", null, /* @__PURE__ */ import_react2.default.createElement("li", null, !loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/login" }, "SIGN IN ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/" }, "NEW MESSAGE ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null))), /* @__PURE__ */ import_react2.default.createElement("li", null, !loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/registration" }, "SIGN UP ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/registration" }, "LOGOUT ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)))))), props.children);
+  };
+  var Header_default = Header;
+
+  // app/javascript/components/Pages/Home.jsx
+  var Home = () => {
+    return /* @__PURE__ */ import_react3.default.createElement(Header_default, null, /* @__PURE__ */ import_react3.default.createElement("h1", null, "THIS IS HOME PAGE CREATED REACT LIBRARY"));
+  };
+  var Home_default = Home;
+
+  // app/javascript/components/Pages/Login.jsx
+  var import_react12 = __toESM(require_react());
+
+  // app/javascript/components/forms/Forms.jsx
+  var import_react7 = __toESM(require_react());
+
   // app/javascript/components/Wrappers/MainWrapper.jsx
+  var import_react4 = __toESM(require_react());
   var MainWrapper = (props) => {
-    return /* @__PURE__ */ import_react2.default.createElement("div", { className: "wrapper" }, /* @__PURE__ */ import_react2.default.createElement("h2", null, props.chapter, /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), /* @__PURE__ */ import_react2.default.createElement("div", { className: "cover" }, props.children));
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "wrapper" }, /* @__PURE__ */ import_react4.default.createElement("h2", null, props.chapter, /* @__PURE__ */ import_react4.default.createElement(IconReact_default, null)), /* @__PURE__ */ import_react4.default.createElement("div", { className: "cover" }, props.children));
   };
   var MainWrapper_default = MainWrapper;
 
   // app/javascript/components/Wrappers/FieldInput.jsx
-  var import_react4 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
 
   // app/javascript/components/hooks/use-input.jsx
-  var import_react3 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   var UseInput = (validateValue) => {
-    const [valueEntered, setValueEntered] = (0, import_react3.useState)("");
-    const [isTouched, setIsTouched] = (0, import_react3.useState)(false);
+    const [valueEntered, setValueEntered] = (0, import_react5.useState)("");
+    const [isTouched, setIsTouched] = (0, import_react5.useState)(false);
     const valueIsValid = validateValue(valueEntered);
     const hasError = !valueIsValid && isTouched;
     const valueChangeInputHandler = (event) => {
@@ -31506,7 +31528,7 @@
       blurHandler,
       reset: resetInput
     } = use_input_default(props.cond);
-    (0, import_react4.useEffect)(() => {
+    (0, import_react6.useEffect)(() => {
       props.data({
         value: valueEntered,
         hasError: thisInputHasError,
@@ -31515,7 +31537,7 @@
       });
     }, [thisInputHasError, valueEntered, valueIsValid]);
     const inputClasses = thisInputHasError ? "invalid" : "";
-    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "field" }, /* @__PURE__ */ import_react4.default.createElement("label", { htmlFor: props.label, className: "label" }, props.label), /* @__PURE__ */ import_react4.default.createElement("br", null), /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react6.default.createElement("div", { className: "field" }, /* @__PURE__ */ import_react6.default.createElement("label", { htmlFor: props.label, className: "label" }, props.label), /* @__PURE__ */ import_react6.default.createElement("br", null), /* @__PURE__ */ import_react6.default.createElement(
       "input",
       {
         type: props.type,
@@ -31525,33 +31547,33 @@
         value: valueEntered,
         autoComplete: props.label
       }
-    ), thisInputHasError && /* @__PURE__ */ import_react4.default.createElement("p", { id: "error_explanation_react" }, props.label, " ", props.err));
+    ), thisInputHasError && /* @__PURE__ */ import_react6.default.createElement("p", { id: "error_explanation_react" }, props.label, " ", props.err));
   };
   var FieldInput_default = FieldInput;
 
   // app/javascript/components/forms/Forms.jsx
-  var import_react6 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
   var Forms = (props) => {
-    const [formData, setFormData] = (0, import_react6.useState)({ isValid: true, data: {} });
-    const [enteredName, setEnteredName] = (0, import_react6.useState)({});
-    const [enteredEmail, setEnteredEmail] = (0, import_react6.useState)({});
-    const [enteredPsw, setEnteredPsw] = (0, import_react6.useState)({});
-    const [enteredPswCnf, setEnteredPswCnf] = (0, import_react6.useState)({});
-    const [fields, setFields] = (0, import_react6.useState)(4);
+    const [formData, setFormData] = (0, import_react8.useState)({ isValid: true, data: {} });
+    const [enteredName, setEnteredName] = (0, import_react8.useState)({});
+    const [enteredEmail, setEnteredEmail] = (0, import_react8.useState)({});
+    const [enteredPsw, setEnteredPsw] = (0, import_react8.useState)({});
+    const [enteredPswCnf, setEnteredPswCnf] = (0, import_react8.useState)({});
+    const [fields, setFields] = (0, import_react8.useState)(4);
     const nameCond = (value) => value.trim() !== "" && value.length > 1 && value.length < 20;
     const errName = "can't be empty or less 2 chars and more 20 chars";
     const emailCond = (value) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
     const errEmail = "can't be empty and must be really";
     const pswCond = (value) => value.trim() !== "" && value.length > 5 && value.length < 128;
     const errPsw = "can't be empty and must be \nhave minimum 6 chars and equal to password";
-    (0, import_react5.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       setFields(props.howFields * 1);
     });
     const formSubmissionHandler = (event) => {
       event.preventDefault();
       props.action(formData.data);
     };
-    (0, import_react5.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       if ((fields !== 4 || enteredName.isValid) && (fields !== 1 && fields !== 2 && fields !== 4 || enteredEmail.isValid) && (fields % 2 && fields % 3 || enteredPsw.isValid) && (fields !== 4 && fields !== 3 || enteredPswCnf.isValid)) {
         setFormData({ isValid: true, data: {
           name: enteredName.value,
@@ -31576,31 +31598,19 @@
     const pswCnfData = (obj) => {
       setEnteredPswCnf(obj);
     };
-    return /* @__PURE__ */ import_react5.default.createElement(MainWrapper_default, { chapter: props.title }, /* @__PURE__ */ import_react5.default.createElement("form", { onSubmit: formSubmissionHandler }, fields === 4 && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "name", type: "text", data: nameData, cond: nameCond, err: errName }), (fields === 4 || fields === 2 || fields === 1) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "email", type: "email", data: emailData, cond: emailCond, err: errEmail }), (fields === 4 || fields === 2 || fields === 3) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "password", type: "password", data: pswData, cond: pswCond, err: errPsw }), (fields === 4 || fields === 3) && /* @__PURE__ */ import_react5.default.createElement(FieldInput_default, { label: "password confirmation", type: "password", data: pswCnfData, cond: pswCond, err: errPsw }), /* @__PURE__ */ import_react5.default.createElement("button", { className: "button", disabled: !formData.isValid }, props.wrtOnBtn || "Submit"), props.children));
+    return /* @__PURE__ */ import_react7.default.createElement(MainWrapper_default, { chapter: props.title }, /* @__PURE__ */ import_react7.default.createElement("form", { onSubmit: formSubmissionHandler }, fields === 4 && /* @__PURE__ */ import_react7.default.createElement(FieldInput_default, { label: "name", type: "text", data: nameData, cond: nameCond, err: errName }), (fields === 4 || fields === 2 || fields === 1) && /* @__PURE__ */ import_react7.default.createElement(FieldInput_default, { label: "email", type: "email", data: emailData, cond: emailCond, err: errEmail }), (fields === 4 || fields === 2 || fields === 3) && /* @__PURE__ */ import_react7.default.createElement(FieldInput_default, { label: "password", type: "password", data: pswData, cond: pswCond, err: errPsw }), (fields === 4 || fields === 3) && /* @__PURE__ */ import_react7.default.createElement(FieldInput_default, { label: "password confirmation", type: "password", data: pswCnfData, cond: pswCond, err: errPsw }), /* @__PURE__ */ import_react7.default.createElement("button", { className: "button", disabled: !formData.isValid }, props.wrtOnBtn || "Submit"), props.children));
   };
   var Forms_default = Forms;
 
   // app/javascript/components/forms/Links.jsx
-  var import_react7 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
   var Links = (props) => {
-    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "links" }, props.form !== "Login" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/login" }, "LOGIN")), props.form !== "Registrations" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/registration" }, "SIGN UP")), props.form !== "ForgotPassword" && props.form !== "Registrations" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/forgot_password" }, "Forgot your password?")), props.form !== "ResendInstruction" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react7.default.createElement(Link, { to: "/resend_instruction" }, "Didn't receive confirmation instructions?")));
+    return /* @__PURE__ */ import_react9.default.createElement("div", { className: "links" }, props.form !== "Login" && /* @__PURE__ */ import_react9.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react9.default.createElement(Link, { to: "/login" }, "LOGIN")), props.form !== "Registrations" && /* @__PURE__ */ import_react9.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react9.default.createElement(Link, { to: "/registration" }, "SIGN UP")), props.form !== "ForgotPassword" && props.form !== "Registrations" && /* @__PURE__ */ import_react9.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react9.default.createElement(Link, { to: "/forgot_password" }, "Forgot your password?")), props.form !== "ResendInstruction" && /* @__PURE__ */ import_react9.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react9.default.createElement(Link, { to: "/resend_instruction" }, "Didn't receive confirmation instructions?")));
   };
   var Links_default = Links;
 
-  // app/javascript/components/Pages/Login.jsx
-  var Login = () => {
-    const sendData = (data) => {
-      console.log(data);
-    };
-    return /* @__PURE__ */ import_react8.default.createElement(Forms_default, { howFields: "2", title: "Login", wrtOnBtn: "It's my account", action: sendData }, /* @__PURE__ */ import_react8.default.createElement(Links_default, { form: "Login" }));
-  };
-  var Login_default = Login;
-
-  // app/javascript/components/Pages/Registrations.jsx
-  var import_react11 = __toESM(require_react());
-
   // app/javascript/components/hooks/use-http.jsx
-  var import_react9 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
 
   // app/javascript/components/helper_function/flash.jsx
   function flash(type, data) {
@@ -31651,12 +31661,12 @@
     return state;
   }
   function useHttp(requestFunction, startWithPending = false) {
-    const [httpState, dispatch2] = (0, import_react9.useReducer)(httpReducer, {
+    const [httpState, dispatch2] = (0, import_react10.useReducer)(httpReducer, {
       status: startWithPending ? "pending" : null,
       data: null,
       error: null
     });
-    const sendRequest = (0, import_react9.useCallback)(
+    const sendRequest = (0, import_react10.useCallback)(
       async function(requestData) {
         dispatch2({ type: "SEND" });
         try {
@@ -31679,7 +31689,7 @@
   var use_http_default = useHttp;
 
   // app/javascript/components/lib/api.jsx
-  var import_react10 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
   var domain = "http://localhost:3000";
   var csrf_token = document.getElementsByName("csrf-token")[0].getAttribute("content");
   var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
@@ -31703,7 +31713,33 @@
     return { "info": data };
   }
 
+  // app/javascript/components/Pages/Login.jsx
+  var Login = () => {
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const loginContext = (0, import_react12.useContext)(login_context_default);
+    const sendData = (dt) => {
+      sendRequest(
+        {
+          dataUser: { user: dt },
+          url: "/users/sign_in",
+          method: "POST"
+        }
+      );
+    };
+    try {
+      if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
+        loginContext.login(data.info["token"]);
+        return /* @__PURE__ */ import_react12.default.createElement(Home_default, null);
+      }
+    } catch (e) {
+      flash("danger", e.message);
+    }
+    return /* @__PURE__ */ import_react12.default.createElement(Header_default, null, /* @__PURE__ */ import_react12.default.createElement(Forms_default, { howFields: "2", title: "Login", wrtOnBtn: "It's my account", action: sendData }, /* @__PURE__ */ import_react12.default.createElement(Links_default, { form: "Login" })));
+  };
+  var Login_default = Login;
+
   // app/javascript/components/Pages/Registrations.jsx
+  var import_react13 = __toESM(require_react());
   var Registrations = () => {
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
     const sendData = (data2) => {
@@ -31716,14 +31752,14 @@
       );
     };
     if (status === "completed" && data.info["danger"] === void 0) {
-      return /* @__PURE__ */ import_react11.default.createElement(Home_default, null);
+      return /* @__PURE__ */ import_react13.default.createElement(Home_default, null);
     }
-    return /* @__PURE__ */ import_react11.default.createElement(Forms_default, { howFields: "4", title: "Sign Up", wrtOnBtn: "Want Account", action: sendData }, /* @__PURE__ */ import_react11.default.createElement(Links_default, { form: "Registrations" }));
+    return /* @__PURE__ */ import_react13.default.createElement(Header_default, null, /* @__PURE__ */ import_react13.default.createElement(Forms_default, { howFields: "4", title: "Sign Up", wrtOnBtn: "Want Account", action: sendData }, /* @__PURE__ */ import_react13.default.createElement(Links_default, { form: "Registrations" })));
   };
   var Registrations_default = Registrations;
 
   // app/javascript/components/Pages/ResendInstruction.jsx
-  var import_react12 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
   var ResendInstruction = () => {
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
     const sendData = (data2) => {
@@ -31736,9 +31772,9 @@
       );
     };
     if (status === "completed" && data.info["danger"] === void 0) {
-      return /* @__PURE__ */ import_react12.default.createElement(Home_default, null);
+      return /* @__PURE__ */ import_react14.default.createElement(Home_default, null);
     }
-    return /* @__PURE__ */ import_react12.default.createElement(
+    return /* @__PURE__ */ import_react14.default.createElement(Header_default, null, /* @__PURE__ */ import_react14.default.createElement(
       Forms_default,
       {
         howFields: "1",
@@ -31746,43 +31782,56 @@
         wrtOnBtn: "Get instruction again",
         action: sendData
       },
-      /* @__PURE__ */ import_react12.default.createElement(Links_default, { form: "ResendInstruction" })
-    );
+      /* @__PURE__ */ import_react14.default.createElement(Links_default, { form: "ResendInstruction" })
+    ));
   };
   var ResendInstruction_default = ResendInstruction;
 
   // app/javascript/components/Pages/ResetPassword.jsx
-  var import_react13 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
   var ResetPassword = () => {
-    return /* @__PURE__ */ import_react13.default.createElement(Forms_default, { howFields: "3", title: "Reset your password", wrtOnBtn: "Create new password" }, /* @__PURE__ */ import_react13.default.createElement(Links_default, { form: "ResetPassword" }));
+    return /* @__PURE__ */ import_react15.default.createElement(Header_default, null, /* @__PURE__ */ import_react15.default.createElement(Forms_default, { howFields: "3", title: "Reset your password", wrtOnBtn: "Create new password" }, /* @__PURE__ */ import_react15.default.createElement(Links_default, { form: "ResetPassword" })));
   };
   var ResetPassword_default = ResetPassword;
 
   // app/javascript/components/Pages/ForgotPassword.jsx
-  var import_react14 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
   var ForgotPassword = () => {
-    return /* @__PURE__ */ import_react14.default.createElement(Forms_default, { howFields: "1", title: "Forgot your password?", wrtOnBtn: "Get instruction to reset password" }, /* @__PURE__ */ import_react14.default.createElement(Links_default, { form: "ForgotPassword" }));
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const sendData = (data2) => {
+      sendRequest(
+        {
+          dataUser: { user: data2 },
+          url: "/users/password",
+          method: "POST"
+        }
+      );
+    };
+    if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
+      return /* @__PURE__ */ import_react16.default.createElement(Home_default, null);
+    }
+    return /* @__PURE__ */ import_react16.default.createElement(Header_default, null, /* @__PURE__ */ import_react16.default.createElement(Forms_default, { howFields: "1", title: "Forgot your password?", wrtOnBtn: "Get instruction to reset password", action: sendData }, /* @__PURE__ */ import_react16.default.createElement(Links_default, { form: "ForgotPassword" })));
   };
   var ForgotPassword_default = ForgotPassword;
 
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react15.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react15.default.createElement(Login_default, null) },
+    { path: "/", element: /* @__PURE__ */ import_react17.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react17.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/registration", element: /* @__PURE__ */ import_react15.default.createElement(Registrations_default, null) },
-    { path: "/forgot_password", element: /* @__PURE__ */ import_react15.default.createElement(ForgotPassword_default, null) },
-    { path: "/reset_password", element: /* @__PURE__ */ import_react15.default.createElement(ResetPassword_default, null) },
-    { path: "/resend_instruction", element: /* @__PURE__ */ import_react15.default.createElement(ResendInstruction_default, null) }
+    { path: "/registration", element: /* @__PURE__ */ import_react17.default.createElement(Registrations_default, null) },
+    { path: "/forgot_password", element: /* @__PURE__ */ import_react17.default.createElement(ForgotPassword_default, null) },
+    { path: "/reset_password", element: /* @__PURE__ */ import_react17.default.createElement(ResetPassword_default, null) },
+    { path: "/resend_instruction", element: /* @__PURE__ */ import_react17.default.createElement(ResendInstruction_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react15.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react17.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react16.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react18.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 
