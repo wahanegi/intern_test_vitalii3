@@ -31690,7 +31690,8 @@
 
   // app/javascript/components/lib/api.jsx
   var import_react11 = __toESM(require_react());
-  var domain = "https://cp-vitalii.herokuapp.com";
+  var domain = location.origin;
+  console.log(domain);
   var csrf_token = document.getElementsByName("csrf-token")[0].getAttribute("content");
   var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
   async function requests_answers(sData) {

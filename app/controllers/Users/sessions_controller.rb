@@ -18,7 +18,6 @@ class Users::SessionsController < Devise::SessionsController
     password_valid = (@user = User.find_by(email: sign_in_params[:email])) ?
                        @user.valid_password?(sign_in_params[:password])
                        : false
-    debugger
     if  @user && password_valid && @user.confirmed?
       info = "Welcome to our GIGGLE-💪I🤫🤣🦶👍. Now you can to create own like-twitter-messages(only funny) and divide it with your friends"
       flash[:notice] = info
