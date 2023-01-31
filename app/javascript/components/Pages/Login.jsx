@@ -24,7 +24,10 @@ const Login = () => {
             loginContext.login(data.info['token'])
             return <Home/>
         }
-    } catch (e) {flash('danger', e.message)}
+    } catch (e) {flash('danger', e.message); return true}
+    finally {
+        console.log ("Error bind with Login exception")
+    }
     // },[ status, data, error ])
 
     return (

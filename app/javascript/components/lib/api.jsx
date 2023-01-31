@@ -52,5 +52,9 @@ export async function requests_answers(sData) {
     catch (e) {
         console.log(e.message)
         flash('danger', e.message)
+        return true
+    }
+    finally {
+        console.log ("Error bind with API exception")
     }
 }
