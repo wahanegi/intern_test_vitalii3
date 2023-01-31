@@ -2,8 +2,8 @@ import React from 'react';
 import flash from "../helper_function/flash";
 
 //TODO change domain by production
-//const domain = "https://cp-vitalii.herokuapp.com"
-const domain = "http://localhost:3000"
+const domain = "https://cp-vitalii.herokuapp.com"
+//const domain = "http://localhost:3000"
 const csrf_token = document.getElementsByName('csrf-token')[0].getAttribute('content')
 const csrf_param = document.getElementsByName('csrf-param')[0].getAttribute('content')
 
