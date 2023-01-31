@@ -5,4 +5,4 @@
 // import "@rails/actiontext"
 // import "jquery"
 
-import "./components/index.jsx"
+// import "./components/index.jsx"
