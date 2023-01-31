@@ -22,12 +22,13 @@ const Login = () => {
     try {
         if (status === 'completed' && (data.info['danger'] === null || data.info['danger'] === undefined)) {
             loginContext.login(data.info['token'])
+            console.log(data.info['token']);
             return <Home/>
         }
-    } catch (e) {flash('danger', e.message); return true}
-    finally {
-        console.log ("Error bind with Login exception")
-    }
+    } catch (e) {flash('danger', e.message)}
+    // finally {
+    //     console.log ("Error bind with Login exception")
+    // }
     // },[ status, data, error ])
 
     return (

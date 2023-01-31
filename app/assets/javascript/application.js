@@ -1660,7 +1660,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState7(initialState) {
+          function useState8(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1672,7 +1672,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect7(create, deps) {
+          function useEffect8(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2454,7 +2454,7 @@
           exports.useContext = useContext5;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect7;
+          exports.useEffect = useEffect8;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2462,7 +2462,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
-          exports.useState = useState7;
+          exports.useState = useState8;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React21 = require_react();
+          var React22 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3009,7 +3009,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment2 = 7;
+          var Fragment3 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -4165,7 +4165,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment2:
+              case Fragment3:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React21.Children.forEach(props.children, function(child) {
+                  React22.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React21.Component().refs;
+          var emptyRefsObject = new React22.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -13836,7 +13836,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment2) {
+              if (current2 === null || current2.tag !== Fragment3) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -14239,7 +14239,7 @@
                 if (child.key === key) {
                   var elementType2 = element.type;
                   if (elementType2 === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment2) {
+                    if (child.tag === Fragment3) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -18414,7 +18414,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment2:
+              case Fragment3:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -18687,7 +18687,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment2:
+              case Fragment3:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -22946,7 +22946,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment2, elements, key, mode);
+            var fiber = createFiber(Fragment3, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -27853,14 +27853,14 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react18 = __toESM(require_react());
+  var import_react20 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react17 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
-  var React2 = __toESM(require_react());
+  var React3 = __toESM(require_react());
 
   // node_modules/@remix-run/router/dist/router.js
   function _extends() {
@@ -30206,7 +30206,7 @@
   }
 
   // node_modules/react-router/dist/index.js
-  var React = __toESM(require_react());
+  var React2 = __toESM(require_react());
   function _extends2() {
     _extends2 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -30230,13 +30230,13 @@
     useEffect: useEffect2,
     useLayoutEffect: useLayoutEffect2,
     useDebugValue
-  } = React;
+  } = React2;
   var didWarnOld18Alpha = false;
   var didWarnUncachedGetSnapshot = false;
   function useSyncExternalStore$2(subscribe, getSnapshot, getServerSnapshot) {
     if (true) {
       if (!didWarnOld18Alpha) {
-        if ("startTransition" in React) {
+        if ("startTransition" in React2) {
           didWarnOld18Alpha = true;
           console.error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release.");
         }
@@ -30303,35 +30303,35 @@
   var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
   var isServerEnvironment = !canUseDOM;
   var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore$2;
-  var useSyncExternalStore = "useSyncExternalStore" in React ? ((module) => module.useSyncExternalStore)(React) : shim;
-  var DataRouterContext = /* @__PURE__ */ React.createContext(null);
+  var useSyncExternalStore = "useSyncExternalStore" in React2 ? ((module) => module.useSyncExternalStore)(React2) : shim;
+  var DataRouterContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     DataRouterContext.displayName = "DataRouter";
   }
-  var DataRouterStateContext = /* @__PURE__ */ React.createContext(null);
+  var DataRouterStateContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     DataRouterStateContext.displayName = "DataRouterState";
   }
-  var AwaitContext = /* @__PURE__ */ React.createContext(null);
+  var AwaitContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     AwaitContext.displayName = "Await";
   }
-  var NavigationContext = /* @__PURE__ */ React.createContext(null);
+  var NavigationContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     NavigationContext.displayName = "Navigation";
   }
-  var LocationContext = /* @__PURE__ */ React.createContext(null);
+  var LocationContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     LocationContext.displayName = "Location";
   }
-  var RouteContext = /* @__PURE__ */ React.createContext({
+  var RouteContext = /* @__PURE__ */ React2.createContext({
     outlet: null,
     matches: []
   });
   if (true) {
     RouteContext.displayName = "Route";
   }
-  var RouteErrorContext = /* @__PURE__ */ React.createContext(null);
+  var RouteErrorContext = /* @__PURE__ */ React2.createContext(null);
   if (true) {
     RouteErrorContext.displayName = "RouteError";
   }
@@ -30348,7 +30348,7 @@
     let {
       basename,
       navigator: navigator2
-    } = React.useContext(NavigationContext);
+    } = React2.useContext(NavigationContext);
     let {
       hash,
       pathname,
@@ -30367,7 +30367,7 @@
     });
   }
   function useInRouterContext() {
-    return React.useContext(LocationContext) != null;
+    return React2.useContext(LocationContext) != null;
   }
   function useLocation() {
     !useInRouterContext() ? true ? invariant(
@@ -30376,7 +30376,7 @@
       // router loaded. We can help them understand how to avoid that.
       "useLocation() may be used only in the context of a <Router> component."
     ) : invariant(false) : void 0;
-    return React.useContext(LocationContext).location;
+    return React2.useContext(LocationContext).location;
   }
   function useNavigate() {
     !useInRouterContext() ? true ? invariant(
@@ -30388,19 +30388,19 @@
     let {
       basename,
       navigator: navigator2
-    } = React.useContext(NavigationContext);
+    } = React2.useContext(NavigationContext);
     let {
       matches
-    } = React.useContext(RouteContext);
+    } = React2.useContext(RouteContext);
     let {
       pathname: locationPathname
     } = useLocation();
     let routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase));
-    let activeRef = React.useRef(false);
-    React.useEffect(() => {
+    let activeRef = React2.useRef(false);
+    React2.useEffect(() => {
       activeRef.current = true;
     });
-    let navigate = React.useCallback(function(to, options) {
+    let navigate = React2.useCallback(function(to, options) {
       if (options === void 0) {
         options = {};
       }
@@ -30425,12 +30425,12 @@
     } = _temp2 === void 0 ? {} : _temp2;
     let {
       matches
-    } = React.useContext(RouteContext);
+    } = React2.useContext(RouteContext);
     let {
       pathname: locationPathname
     } = useLocation();
     let routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase));
-    return React.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, relative === "path"), [to, routePathnamesJson, locationPathname, relative]);
+    return React2.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, relative === "path"), [to, routePathnamesJson, locationPathname, relative]);
   }
   function useRoutes(routes, locationArg) {
     !useInRouterContext() ? true ? invariant(
@@ -30441,11 +30441,11 @@
     ) : invariant(false) : void 0;
     let {
       navigator: navigator2
-    } = React.useContext(NavigationContext);
-    let dataRouterStateContext = React.useContext(DataRouterStateContext);
+    } = React2.useContext(NavigationContext);
+    let dataRouterStateContext = React2.useContext(DataRouterStateContext);
     let {
       matches: parentMatches
-    } = React.useContext(RouteContext);
+    } = React2.useContext(RouteContext);
     let routeMatch = parentMatches[parentMatches.length - 1];
     let parentParams = routeMatch ? routeMatch.params : {};
     let parentPathname = routeMatch ? routeMatch.pathname : "/";
@@ -30490,7 +30490,7 @@
       ])
     })), parentMatches, dataRouterStateContext || void 0);
     if (locationArg && renderedMatches) {
-      return /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+      return /* @__PURE__ */ React2.createElement(LocationContext.Provider, {
         value: {
           location: _extends2({
             pathname: "/",
@@ -30520,21 +30520,21 @@
     };
     let devInfo = null;
     if (true) {
-      devInfo = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own\xA0", /* @__PURE__ */ React.createElement("code", {
+      devInfo = /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React2.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own\xA0", /* @__PURE__ */ React2.createElement("code", {
         style: codeStyles
-      }, "errorElement"), " props on\xA0", /* @__PURE__ */ React.createElement("code", {
+      }, "errorElement"), " props on\xA0", /* @__PURE__ */ React2.createElement("code", {
         style: codeStyles
       }, "<Route>")));
     }
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React.createElement("h3", {
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React2.createElement("h3", {
       style: {
         fontStyle: "italic"
       }
-    }, message), stack ? /* @__PURE__ */ React.createElement("pre", {
+    }, message), stack ? /* @__PURE__ */ React2.createElement("pre", {
       style: preStyles
     }, stack) : null, devInfo);
   }
-  var RenderErrorBoundary = class extends React.Component {
+  var RenderErrorBoundary = class extends React2.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -30563,9 +30563,9 @@
       console.error("React Router caught the following error during render", error, errorInfo);
     }
     render() {
-      return this.state.error ? /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+      return this.state.error ? /* @__PURE__ */ React2.createElement(RouteContext.Provider, {
         value: this.props.routeContext
-      }, /* @__PURE__ */ React.createElement(RouteErrorContext.Provider, {
+      }, /* @__PURE__ */ React2.createElement(RouteErrorContext.Provider, {
         value: this.state.error,
         children: this.props.component
       })) : this.props.children;
@@ -30577,11 +30577,11 @@
       match,
       children
     } = _ref;
-    let dataRouterContext = React.useContext(DataRouterContext);
+    let dataRouterContext = React2.useContext(DataRouterContext);
     if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && match.route.errorElement) {
       dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
     }
-    return /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+    return /* @__PURE__ */ React2.createElement(RouteContext.Provider, {
       value: routeContext
     }, children);
   }
@@ -30605,16 +30605,16 @@
     }
     return renderedMatches.reduceRight((outlet, match, index) => {
       let error = match.route.id ? errors == null ? void 0 : errors[match.route.id] : null;
-      let errorElement = dataRouterState ? match.route.errorElement || /* @__PURE__ */ React.createElement(DefaultErrorElement, null) : null;
+      let errorElement = dataRouterState ? match.route.errorElement || /* @__PURE__ */ React2.createElement(DefaultErrorElement, null) : null;
       let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
-      let getChildren = () => /* @__PURE__ */ React.createElement(RenderedRoute, {
+      let getChildren = () => /* @__PURE__ */ React2.createElement(RenderedRoute, {
         match,
         routeContext: {
           outlet,
           matches: matches2
         }
       }, error ? errorElement : match.route.element !== void 0 ? match.route.element : outlet);
-      return dataRouterState && (match.route.errorElement || index === 0) ? /* @__PURE__ */ React.createElement(RenderErrorBoundary, {
+      return dataRouterState && (match.route.errorElement || index === 0) ? /* @__PURE__ */ React2.createElement(RenderErrorBoundary, {
         location: dataRouterState.location,
         component: errorElement,
         error,
@@ -30645,12 +30645,12 @@
     return hookName + " must be used within a data router.  See https://reactrouter.com/routers/picking-a-router.";
   }
   function useDataRouterState(hookName) {
-    let state = React.useContext(DataRouterStateContext);
+    let state = React2.useContext(DataRouterStateContext);
     !state ? true ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
     return state;
   }
   function useRouteContext(hookName) {
-    let route = React.useContext(RouteContext);
+    let route = React2.useContext(RouteContext);
     !route ? true ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
     return route;
   }
@@ -30669,7 +30669,7 @@
       matches,
       loaderData
     } = useDataRouterState(DataRouterStateHook.UseMatches);
-    return React.useMemo(() => matches.map((match) => {
+    return React2.useMemo(() => matches.map((match) => {
       let {
         pathname,
         params
@@ -30685,7 +30685,7 @@
   }
   function useRouteError() {
     var _state$errors;
-    let error = React.useContext(RouteErrorContext);
+    let error = React2.useContext(RouteErrorContext);
     let state = useDataRouterState(DataRouterStateHook.UseRouteError);
     let routeId = useCurrentRouteId(DataRouterStateHook.UseRouteError);
     if (error) {
@@ -30713,7 +30713,7 @@
       // is already synced with what the server saw
       () => router2.state
     );
-    let navigator2 = React.useMemo(() => {
+    let navigator2 = React2.useMemo(() => {
       return {
         createHref: router2.createHref,
         encodeLocation: router2.encodeLocation,
@@ -30730,7 +30730,7 @@
       };
     }, [router2]);
     let basename = router2.basename || "/";
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(DataRouterContext.Provider, {
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement(DataRouterContext.Provider, {
       value: {
         router: router2,
         navigator: navigator2,
@@ -30738,14 +30738,14 @@
         // Do we need this?
         basename
       }
-    }, /* @__PURE__ */ React.createElement(DataRouterStateContext.Provider, {
+    }, /* @__PURE__ */ React2.createElement(DataRouterStateContext.Provider, {
       value: state
-    }, /* @__PURE__ */ React.createElement(Router, {
+    }, /* @__PURE__ */ React2.createElement(Router, {
       basename: router2.basename,
       location: router2.state.location,
       navigationType: router2.state.historyAction,
       navigator: navigator2
-    }, router2.state.initialized ? /* @__PURE__ */ React.createElement(Routes, null) : fallbackElement))), null);
+    }, router2.state.initialized ? /* @__PURE__ */ React2.createElement(Routes, null) : fallbackElement))), null);
   }
   function Route(_props) {
     true ? invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, never rendered directly. Please wrap your <Route> in a <Routes>.") : invariant(false);
@@ -30761,7 +30761,7 @@
     } = _ref4;
     !!useInRouterContext() ? true ? invariant(false, "You cannot render a <Router> inside another <Router>. You should never have more than one in your app.") : invariant(false) : void 0;
     let basename = basenameProp.replace(/^\/*/, "/");
-    let navigationContext = React.useMemo(() => ({
+    let navigationContext = React2.useMemo(() => ({
       basename,
       navigator: navigator2,
       static: staticProp
@@ -30776,7 +30776,7 @@
       state = null,
       key = "default"
     } = locationProp;
-    let location2 = React.useMemo(() => {
+    let location2 = React2.useMemo(() => {
       let trailingPathname = stripBasename(pathname, basename);
       if (trailingPathname == null) {
         return null;
@@ -30793,9 +30793,9 @@
     if (location2 == null) {
       return null;
     }
-    return /* @__PURE__ */ React.createElement(NavigationContext.Provider, {
+    return /* @__PURE__ */ React2.createElement(NavigationContext.Provider, {
       value: navigationContext
-    }, /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+    }, /* @__PURE__ */ React2.createElement(LocationContext.Provider, {
       children,
       value: {
         location: location2,
@@ -30808,7 +30808,7 @@
       children,
       location: location2
     } = _ref5;
-    let dataRouterContext = React.useContext(DataRouterContext);
+    let dataRouterContext = React2.useContext(DataRouterContext);
     let routes = dataRouterContext && !children ? dataRouterContext.router.routes : createRoutesFromChildren(children);
     return useRoutes(routes, location2);
   }
@@ -30825,11 +30825,11 @@
       parentPath = [];
     }
     let routes = [];
-    React.Children.forEach(children, (element, index) => {
-      if (!/* @__PURE__ */ React.isValidElement(element)) {
+    React2.Children.forEach(children, (element, index) => {
+      if (!/* @__PURE__ */ React2.isValidElement(element)) {
         return;
       }
-      if (element.type === React.Fragment) {
+      if (element.type === React2.Fragment) {
         routes.push.apply(routes, createRoutesFromChildren(element.props.children, parentPath));
         return;
       }
@@ -31026,12 +31026,12 @@
       children,
       history: history2
     } = _ref3;
-    const [state, setState] = React2.useState({
+    const [state, setState] = React3.useState({
       action: history2.action,
       location: history2.location
     });
-    React2.useLayoutEffect(() => history2.listen(setState), [history2]);
-    return /* @__PURE__ */ React2.createElement(Router, {
+    React3.useLayoutEffect(() => history2.listen(setState), [history2]);
+    return /* @__PURE__ */ React3.createElement(Router, {
       basename,
       children,
       location: state.location,
@@ -31043,7 +31043,7 @@
     HistoryRouter.displayName = "unstable_HistoryRouter";
   }
   var isBrowser2 = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
-  var Link = /* @__PURE__ */ React2.forwardRef(function LinkWithRef(_ref4, ref) {
+  var Link = /* @__PURE__ */ React3.forwardRef(function LinkWithRef(_ref4, ref) {
     let {
       onClick,
       relative,
@@ -31086,7 +31086,7 @@
     }
     return (
       // eslint-disable-next-line jsx-a11y/anchor-has-content
-      /* @__PURE__ */ React2.createElement("a", _extends3({}, rest, {
+      /* @__PURE__ */ React3.createElement("a", _extends3({}, rest, {
         href: isAbsolute ? location2 : href,
         onClick: isExternal || reloadDocument ? onClick : handleClick,
         ref,
@@ -31097,7 +31097,7 @@
   if (true) {
     Link.displayName = "Link";
   }
-  var NavLink = /* @__PURE__ */ React2.forwardRef(function NavLinkWithRef(_ref5, ref) {
+  var NavLink = /* @__PURE__ */ React3.forwardRef(function NavLinkWithRef(_ref5, ref) {
     let {
       "aria-current": ariaCurrentProp = "page",
       caseSensitive = false,
@@ -31111,10 +31111,10 @@
       relative: rest.relative
     });
     let location2 = useLocation();
-    let routerState = React2.useContext(DataRouterStateContext);
+    let routerState = React3.useContext(DataRouterStateContext);
     let {
       navigator: navigator2
-    } = React2.useContext(NavigationContext);
+    } = React3.useContext(NavigationContext);
     let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
     let locationPathname = location2.pathname;
     let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
@@ -31139,7 +31139,7 @@
       isActive,
       isPending
     }) : styleProp;
-    return /* @__PURE__ */ React2.createElement(Link, _extends3({}, rest, {
+    return /* @__PURE__ */ React3.createElement(Link, _extends3({}, rest, {
       "aria-current": ariaCurrent,
       className,
       ref,
@@ -31153,15 +31153,15 @@
   if (true) {
     NavLink.displayName = "NavLink";
   }
-  var Form = /* @__PURE__ */ React2.forwardRef((props, ref) => {
-    return /* @__PURE__ */ React2.createElement(FormImpl, _extends3({}, props, {
+  var Form = /* @__PURE__ */ React3.forwardRef((props, ref) => {
+    return /* @__PURE__ */ React3.createElement(FormImpl, _extends3({}, props, {
       ref
     }));
   });
   if (true) {
     Form.displayName = "Form";
   }
-  var FormImpl = /* @__PURE__ */ React2.forwardRef((_ref6, forwardedRef) => {
+  var FormImpl = /* @__PURE__ */ React3.forwardRef((_ref6, forwardedRef) => {
     let {
       reloadDocument,
       replace,
@@ -31192,7 +31192,7 @@
         preventScrollReset
       });
     };
-    return /* @__PURE__ */ React2.createElement("form", _extends3({
+    return /* @__PURE__ */ React3.createElement("form", _extends3({
       ref: forwardedRef,
       method: formMethod,
       action: formAction,
@@ -31231,12 +31231,12 @@
     return hookName + " must be used within a data router.  See https://reactrouter.com/routers/picking-a-router.";
   }
   function useDataRouterContext(hookName) {
-    let ctx = React2.useContext(DataRouterContext);
+    let ctx = React3.useContext(DataRouterContext);
     !ctx ? true ? invariant(false, getDataRouterConsoleError2(hookName)) : invariant(false) : void 0;
     return ctx;
   }
   function useDataRouterState2(hookName) {
-    let state = React2.useContext(DataRouterStateContext);
+    let state = React3.useContext(DataRouterStateContext);
     !state ? true ? invariant(false, getDataRouterConsoleError2(hookName)) : invariant(false) : void 0;
     return state;
   }
@@ -31253,7 +31253,7 @@
     let path = useResolvedPath(to, {
       relative
     });
-    return React2.useCallback((event) => {
+    return React3.useCallback((event) => {
       if (shouldProcessLinkClick(event, target)) {
         event.preventDefault();
         let replace = replaceProp !== void 0 ? replaceProp : createPath(location2) === createPath(path);
@@ -31271,7 +31271,7 @@
       router: router2
     } = useDataRouterContext(DataRouterHook2.UseSubmitImpl);
     let defaultAction = useFormAction();
-    return React2.useCallback(function(target, options) {
+    return React3.useCallback(function(target, options) {
       if (options === void 0) {
         options = {};
       }
@@ -31306,8 +31306,8 @@
     } = _temp2 === void 0 ? {} : _temp2;
     let {
       basename
-    } = React2.useContext(NavigationContext);
-    let routeContext = React2.useContext(RouteContext);
+    } = React3.useContext(NavigationContext);
+    let routeContext = React3.useContext(RouteContext);
     !routeContext ? true ? invariant(false, "useFormAction must be used inside a RouteContext") : invariant(false) : void 0;
     let [match] = routeContext.matches.slice(-1);
     let path = _extends3({}, useResolvedPath(action ? action : ".", {
@@ -31348,13 +31348,13 @@
     let location2 = useLocation();
     let matches = useMatches();
     let navigation = useNavigation();
-    React2.useEffect(() => {
+    React3.useEffect(() => {
       window.history.scrollRestoration = "manual";
       return () => {
         window.history.scrollRestoration = "auto";
       };
     }, []);
-    usePageHide(React2.useCallback(() => {
+    usePageHide(React3.useCallback(() => {
       if (navigation.state === "idle") {
         let key = (getKey ? getKey(location2, matches) : null) || location2.key;
         savedScrollPositions[key] = window.scrollY;
@@ -31363,7 +31363,7 @@
       window.history.scrollRestoration = "auto";
     }, [storageKey, getKey, navigation.state, location2, matches]));
     if (typeof document !== "undefined") {
-      React2.useLayoutEffect(() => {
+      React3.useLayoutEffect(() => {
         try {
           let sessionPositions = sessionStorage.getItem(storageKey || SCROLL_RESTORATION_STORAGE_KEY);
           if (sessionPositions) {
@@ -31372,11 +31372,11 @@
         } catch (e) {
         }
       }, [storageKey]);
-      React2.useLayoutEffect(() => {
+      React3.useLayoutEffect(() => {
         let disableScrollRestoration = router2 == null ? void 0 : router2.enableScrollRestoration(savedScrollPositions, () => window.scrollY, getKey);
         return () => disableScrollRestoration && disableScrollRestoration();
       }, [router2, getKey]);
-      React2.useLayoutEffect(() => {
+      React3.useLayoutEffect(() => {
         if (restoreScrollPosition === false) {
           return;
         }
@@ -31402,7 +31402,7 @@
     let {
       capture
     } = options || {};
-    React2.useEffect(() => {
+    React3.useEffect(() => {
       let opts = capture != null ? {
         capture
       } : void 0;
@@ -31422,7 +31422,7 @@
   // app/javascript/components/store/login-context.jsx
   var import_react = __toESM(require_react());
   var LoginContext = import_react.default.createContext({
-    token: "",
+    token: null,
     isLoggedIn: false,
     login: () => {
     },
@@ -31432,9 +31432,9 @@
   var login_context_default = LoginContext;
 
   // app/javascript/components/icons/IconReact.jsx
-  var React4 = __toESM(require_react());
+  var React5 = __toESM(require_react());
   function IconReact(props) {
-    return /* @__PURE__ */ React4.createElement(
+    return /* @__PURE__ */ React5.createElement(
       "svg",
       {
         viewBox: "0 0 34 32",
@@ -31443,14 +31443,14 @@
         width: "1em",
         ...props
       },
-      /* @__PURE__ */ React4.createElement(
+      /* @__PURE__ */ React5.createElement(
         "path",
         {
           fill: "currentColor",
           d: "M19.314 15.987a2.392 2.392 0 11-4.784 0 2.392 2.392 0 014.784 0z"
         }
       ),
-      /* @__PURE__ */ React4.createElement(
+      /* @__PURE__ */ React5.createElement(
         "path",
         {
           fill: "currentColor",
@@ -31717,6 +31717,7 @@
     } catch (e) {
       console.log(e.message);
       flash("danger", e.message);
+      return true;
     }
   }
 
@@ -31736,6 +31737,7 @@
     try {
       if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
         loginContext.login(data.info["token"]);
+        console.log(data.info["token"]);
         return /* @__PURE__ */ import_react12.default.createElement(Home_default, null);
       }
     } catch (e) {
@@ -31821,24 +31823,33 @@
   };
   var ForgotPassword_default = ForgotPassword;
 
+  // app/javascript/components/Pages/NotFound.jsx
+  var import_react18 = __toESM(require_react());
+
+  // app/javascript/components/UI/Modal.jsx
+  var import_react_dom = __toESM(require_react_dom());
+  var import_react17 = __toESM(require_react());
+  var portalElement = document.getElementById("overlays");
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react17.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react17.default.createElement(Login_default, null) },
+    { path: "/", element: /* @__PURE__ */ import_react19.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react19.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/registration", element: /* @__PURE__ */ import_react17.default.createElement(Registrations_default, null) },
-    { path: "/forgot_password", element: /* @__PURE__ */ import_react17.default.createElement(ForgotPassword_default, null) },
-    { path: "/reset_password", element: /* @__PURE__ */ import_react17.default.createElement(ResetPassword_default, null) },
-    { path: "/resend_instruction", element: /* @__PURE__ */ import_react17.default.createElement(ResendInstruction_default, null) }
+    { path: "/registration", element: /* @__PURE__ */ import_react19.default.createElement(Registrations_default, null) },
+    { path: "/forgot_password", element: /* @__PURE__ */ import_react19.default.createElement(ForgotPassword_default, null) },
+    { path: "/reset_password", element: /* @__PURE__ */ import_react19.default.createElement(ResetPassword_default, null) },
+    { path: "/resend_instruction", element: /* @__PURE__ */ import_react19.default.createElement(ResendInstruction_default, null) },
+    { path: "*", element: /* @__PURE__ */ import_react19.default.createElement(Home_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react17.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react19.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react18.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react20.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 

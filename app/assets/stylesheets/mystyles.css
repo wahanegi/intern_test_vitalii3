@@ -430,5 +430,77 @@ aside section h1 {
     font-weight: 200;
     cursor: not-allowed;
 }
+.emoji{
+    font-size: 5rem;;
+}
+.from_big_to_small {
+    animation: decreasing 1s ease-in 0.5s;
+    font-size:2rem;
+    font-weight: 900;
+    color:rgb(68, 46, 46);
+    text-align: center;
+}
+
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 7vh;
+    left: 1%;
+    width: 98%;
+    background-color: white;
+    padding: 0.1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+    overflow: auto;
+    border-radius: 1rem;
+}
+.close{
+    position: fixed;
+    left: 98%;
+    top:2vh;
+    left:92%;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+    overflow:hidden;
+}
+.close:active{
+    background-color: black;
+    color:white
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: 40rem;
+        left: calc(50% - 20rem);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 

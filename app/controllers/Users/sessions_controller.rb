@@ -21,13 +21,18 @@ class Users::SessionsController < Devise::SessionsController
     if  @user && password_valid && @user.confirmed?
       info = "Welcome to our GIGGLE-💪I🤫🤣🦶👍. Now you can to create own like-twitter-messages(only funny) and divide it with your friends"
       flash[:notice] = info
+      if params[:user][:return_secure_token]
+        # debugger
       #if current_user render :json => {notice: "You are logged!", login: true}
       # TODO instead of value of token ('9fioejwihr0gj9uiep') need to use function to create digest
-      # and save it in DB
+      # and save it in DB temporary
       render :json => {notice: info,
                        login: true,
-                       token: '9fioejwihr0gj9uiep'} if params[:user][:return_secure_token]
-      redirect_to home_path unless params[:user][:return_secure_token]
+                       token: '9fioejwihr0gj9uiep'}
+      else
+        user_signed_in?
+        redirect_to home_path unless params[:user][:return_secure_token]
+      end
     else
       notice = " Account not activated 😳. Please verify letter activation on your email or resend confirm instruction🔄"
       dark = " YOUR EMAIL and PASSWORD ARE WRONG. PLEASE TYPE IT CORRECTLY"
