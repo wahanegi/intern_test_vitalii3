@@ -2,11 +2,15 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
-  # Settings for Mailtrap
-  #
-  config.action_mailer.delivery_method = :mailtrap
-  config.action_mailer.mailtrap_settings = {
-    api_key: ENV.fetch('MAILTRAP_API_KEY')
+  #FOR TESTING MAILTRAP INBOX
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['user_name_for_heroku'],
+    :password => ENV['password_test_mailtrap_for_heroku'],
+    :address => 'sandbox.smtp.mailtrap.io',
+    :domain => 'sandbox.smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
 
   # TODO Setting Rails for using Mailtrap in development environment

@@ -2,10 +2,20 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
+  #FOR TESTING MAILTRAP INBOX
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['user_name_for_heroku'],
+    :password => ENV['password_test_mailtrap_for_heroku'],
+    :address => 'sandbox.smtp.mailtrap.io',
+    :domain => 'sandbox.smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
 
 
   #DEVISE
-   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
