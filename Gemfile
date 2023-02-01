@@ -85,3 +85,6 @@ gem  'fog', '>=1.36.0'
 
 # Filling database with virtual users
 gem 'faker', '>=1.4.2'
+
+#Mailtrap Ruby Client
+gem 'mailtrap'
