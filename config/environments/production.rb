@@ -4,25 +4,25 @@ Rails.application.configure do
 
   # Settings for Mailtrap
   #
-  # config.action_mailer.delivery_method = :mailtrap
-  # config.action_mailer.mailtrap_settings = {
-  #   api_key: ENV.fetch('MAILTRAP_API_KEY')
-  # }
+  config.action_mailer.delivery_method = :mailtrap
+  config.action_mailer.mailtrap_settings = {
+    api_key: ENV.fetch('MAILTRAP_API_KEY')
+  }
 
   # TODO Setting Rails for using Mailtrap in development environment
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
   host = 'cp-vitalii.herokuapp.com'
   config.action_mailer.default_url_options = { protocol: 'https', host:  host }
-  ActionMailer::Base.smtp_settings = {
-    :address  => 'smtp.mailtrap.io',
-    :port  => 587,
-    :authentication  => :plain,
-    :user_name  => 'apikey',
-    :password  => ENV['MAILTRAP_API_KEY'],
-    :domain  => 'heroku.com',
-    :enable_starttls_auto => true
-  }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address  => 'smtp.mailtrap.io',
+  #   :port  => 587,
+  #   :authentication  => :plain,
+  #   :user_name  => 'apikey',
+  #   :password  => ENV['MAILTRAP_API_KEY'],
+  #   :domain  => 'heroku.com',
+  #   :enable_starttls_auto => true
+  # }
 
   # #TODO Setting Rails for using SendGrid in production environment
   # config.action_mailer.raise_delivery_errors = true
