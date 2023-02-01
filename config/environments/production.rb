@@ -18,7 +18,7 @@ Rails.application.configure do
     :address  => 'smtp.mailtrap.io',
     :port  => 587,
     :authentication  => :plain,
-    :user_name  => 'api',
+    :user_name  => 'apikey',
     :password  => ENV['MAILTRAP_API_KEY'],
     :domain  => 'heroku.com',
     :enable_starttls_auto => true
