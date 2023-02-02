@@ -25,7 +25,7 @@ export const LoginContextProvider = (props) => {
         localStorage.removeItem('token')
     //TODO     request to the server with Log out
         sendRequest(
-            {dataUser:{react:true},
+            {dataUser:{'react': 'true'},
                 url:"/users/sign_out",
                 method: 'DELETE'}
         )

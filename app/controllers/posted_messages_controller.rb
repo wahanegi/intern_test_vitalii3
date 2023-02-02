@@ -12,11 +12,15 @@ class PostedMessagesController < ApplicationController
     ########################################################################################
 
     if @message.save && moral
-      flash[:notice] = "Congratulations. Your message was posted on  our famous GIGGLE-platform 💪I🤫🤣🦶👍"
-      redirect_to home_path
+      info = "Congratulations. Your message was posted on  our famous GIGGLE-platform 💪I🤫🤣🦶👍"
+      params['react'] ?
+        render( :json  => {notice: info})
+        : redirect_to( home_path, notice: info)
     else
-      flash.now[:dark] = "Unfortunately 🙈, your message didn't approve our moral politics and other validation. See agreements"
-      respond_err_with_json @message
+      danger = "Unfortunately 🙈, your message didn't approve our moral politics and other validation. See agreements"
+      params['react'] ?
+        render( :json  => {notice: danger})
+        : redirect_to( home_path, notice: danger)
     end
   end
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import flash from "../helper_function/flash";
+import LoginContext from "../store/login-context";
 
 //TODO change domain by production
 const domain = location.origin
@@ -10,6 +11,7 @@ const csrf_token = document.getElementsByName('csrf-token')[0].getAttribute('con
 const csrf_param = document.getElementsByName('csrf-param')[0].getAttribute('content')
 
 export async function registrations(sData) {
+
     sData[csrf_param] = csrf_token
     console.log(sData)
     // try {
@@ -33,7 +35,6 @@ export async function registrations(sData) {
 
 export async function requests_answers(sData) {
     sData.dataUser[csrf_param] = csrf_token
-    // console.log(sData.dataUser)
     try {
         const responce = await fetch(`${domain}${sData.url}`,
             {
@@ -45,7 +46,6 @@ export async function requests_answers(sData) {
                 'headers': {'Content-type': 'application/json'}
             })
         const data = await responce.json()
-        console.log(data)
         if (!responce.ok){ throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`) }
         return {'info': data}
     }

@@ -1646,7 +1646,7 @@
             }
             return dispatcher;
           }
-          function useContext5(Context) {
+          function useContext6(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1672,7 +1672,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect8(create, deps) {
+          function useEffect9(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2451,10 +2451,10 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback4;
-          exports.useContext = useContext5;
+          exports.useContext = useContext6;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect8;
+          exports.useEffect = useEffect9;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React24 = require_react();
+          var React25 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React24.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React25.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React24.Children.forEach(props.children, function(child) {
+                  React25.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React24.Component().refs;
+          var emptyRefsObject = new React25.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react22 = __toESM(require_react());
+  var import_react23 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react21 = __toESM(require_react());
+  var import_react22 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React3 = __toESM(require_react());
@@ -31530,7 +31530,6 @@
         }
       );
       const data = await responce.json();
-      console.log(data);
       if (!responce.ok) {
         throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
       }
@@ -31566,7 +31565,7 @@
       localStorage.removeItem("token");
       sendRequest(
         {
-          dataUser: { react: true },
+          dataUser: { "react": "true" },
           url: "/users/sign_out",
           method: "DELETE"
         }
@@ -31786,7 +31785,7 @@
       navigate("/login");
     };
     const newMessageHandler = () => {
-      navigate("/");
+      navigate("/new_message");
     };
     const registrationsHandler = (event) => {
       navigate("/registration");
@@ -31893,7 +31892,6 @@
   // app/javascript/components/Pages/Card.jsx
   var import_react19 = __toESM(require_react());
   var Card = (props) => {
-    console.log(props.children);
     return /* @__PURE__ */ import_react19.default.createElement("li", { className: "card" }, /* @__PURE__ */ import_react19.default.createElement("section", null, /* @__PURE__ */ import_react19.default.createElement("aside", { className: "avatar" }, /* @__PURE__ */ import_react19.default.createElement("span", { className: "user_info" }, props.children.id_posted), /* @__PURE__ */ import_react19.default.createElement("div", { className: "left-side" }, /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.gravatar_url, alt: props.children.user_name, className: "gravatar", width: "100px" })))), /* @__PURE__ */ import_react19.default.createElement("span", null, `@{props.user_name}-{props.user_email}} | `), /* @__PURE__ */ import_react19.default.createElement("span", null, "Posted ", props.children.created_at_in_words, " ago"), /* @__PURE__ */ import_react19.default.createElement("div", { className: "posted_message" }, props.children.content, !!props.children.picture_url && /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.picture_url })));
   };
   var Card_default = Card;
@@ -31924,27 +31922,72 @@
   };
   var ListPostedMessages_default = ListPostedMessages;
 
+  // app/javascript/components/Pages/NewMessage.jsx
+  var import_react21 = __toESM(require_react());
+  var NewMessage = () => {
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const {
+      value: valueEntered,
+      isValid: valueIsValid,
+      hasError: thisInputHasError,
+      valueChangeInputHandler,
+      blurHandler,
+      reset: resetInput
+    } = use_input_default((value) => value.length !== 0 && value.length < 256);
+    const sendDataOnServer = (event) => {
+      event.preventDefault();
+      sendRequest(
+        {
+          dataUser: { "posted_message": { "content": valueEntered, "picture": "" }, react: true },
+          url: "/posted_messages",
+          method: "POST"
+        }
+      );
+    };
+    (0, import_react21.useEffect)(() => {
+      try {
+        if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
+          resetInput();
+        }
+      } catch (e) {
+        flash("danger", e.message);
+      }
+    }, [status, data, error]);
+    return /* @__PURE__ */ import_react21.default.createElement(Header_default, null, /* @__PURE__ */ import_react21.default.createElement(MainWrapper_default, { chapter: "NEW MESSAGE" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "cover" }, /* @__PURE__ */ import_react21.default.createElement("form", { onSubmit: sendDataOnServer }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "content" }, /* @__PURE__ */ import_react21.default.createElement(
+      "textarea",
+      {
+        id: "posted_message_content",
+        name: "posted_message",
+        value: valueEntered,
+        onChange: valueChangeInputHandler,
+        onBlur: blurHandler
+      }
+    ), thisInputHasError && /* @__PURE__ */ import_react21.default.createElement("p", { id: "error_explanation_react" }, `"Message can't be empty and more 256 chars"`)), /* @__PURE__ */ import_react21.default.createElement("button", { className: "button", disabled: !valueIsValid }, " Post new message")), /* @__PURE__ */ import_react21.default.createElement("br", null), /* @__PURE__ */ import_react21.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react21.default.createElement(Link, { to: "/eg" }, "BACK TO MAIN PAGE")))));
+  };
+  var NewMessage_default = NewMessage;
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react21.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react21.default.createElement(Login_default, null) },
+    { path: "/", element: /* @__PURE__ */ import_react22.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react22.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/eg", element: /* @__PURE__ */ import_react21.default.createElement(ListPostedMessages_default, null) },
-    { path: "/registration", element: /* @__PURE__ */ import_react21.default.createElement(Registrations_default, null) },
-    { path: "/forgot_password", element: /* @__PURE__ */ import_react21.default.createElement(ForgotPassword_default, null) },
-    { path: "/reset_password", element: /* @__PURE__ */ import_react21.default.createElement(ResetPassword_default, null) },
-    { path: "/resend_instruction", element: /* @__PURE__ */ import_react21.default.createElement(ResendInstruction_default, null) },
-    { path: "*", element: /* @__PURE__ */ import_react21.default.createElement(Home_default, null) }
+    { path: "/eg", element: /* @__PURE__ */ import_react22.default.createElement(ListPostedMessages_default, null) },
+    { path: "/new_message", element: /* @__PURE__ */ import_react22.default.createElement(NewMessage_default, null) },
+    { path: "/registration", element: /* @__PURE__ */ import_react22.default.createElement(Registrations_default, null) },
+    { path: "/forgot_password", element: /* @__PURE__ */ import_react22.default.createElement(ForgotPassword_default, null) },
+    { path: "/reset_password", element: /* @__PURE__ */ import_react22.default.createElement(ResetPassword_default, null) },
+    { path: "/resend_instruction", element: /* @__PURE__ */ import_react22.default.createElement(ResendInstruction_default, null) },
+    { path: "*", element: /* @__PURE__ */ import_react22.default.createElement(Home_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react21.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react22.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
   root.render(
-    /* @__PURE__ */ import_react22.default.createElement(LoginContextProvider, null, /* @__PURE__ */ import_react22.default.createElement(App_default, null))
+    /* @__PURE__ */ import_react23.default.createElement(LoginContextProvider, null, /* @__PURE__ */ import_react23.default.createElement(App_default, null))
   );
 })();
 /*! Bundled license information:

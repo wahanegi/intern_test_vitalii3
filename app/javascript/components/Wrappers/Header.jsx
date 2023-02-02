@@ -17,7 +17,7 @@ const Header = (props) => {
         navigate("/login")
     }
     const newMessageHandler = () => {
-        navigate("/")
+        navigate("/new_message")
     }
     const registrationsHandler = event =>{
         navigate("/registration")

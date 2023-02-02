@@ -8,12 +8,14 @@ import ResetPassword from "./Pages/ResetPassword";
 import ForgotPassword from "./Pages/ForgotPassword";
 import NotFound from "./Pages/NotFound";
 import ListPostedMessages from "./Pages/ListPostedMessages";
+import NewMessage from "./Pages/NewMessage";
 
 const router = createBrowserRouter([
     {path: "/", element: <Home />},
     {path: "/login", element: <Login/>},
     {path: "/logout", element: ""},
     {path: "/eg", element: <ListPostedMessages/>},
+    {path: "/new_message", element: <NewMessage/>},
     {path: "/registration", element: <Registrations/>},
     {path: "/forgot_password", element: <ForgotPassword/>},
     {path: "/reset_password", element: <ResetPassword/>},

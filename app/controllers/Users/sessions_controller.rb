@@ -3,7 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: :create
    prepend_before_action :for_react_handler, only: :destroy
-  # skip_before_action :verify_signed_out_user, only: :destroy
+   skip_before_action :verify_signed_out_user, only: :destroy
 
 
   # GET /resource/sign_in
@@ -23,15 +23,14 @@ class Users::SessionsController < Devise::SessionsController
       info = "Welcome to our GIGGLE-💪I🤫🤣🦶👍. Now you can to create own like-twitter-messages(only funny) and divide it with your friends"
       flash[:notice] = info
       if params[:user][:return_secure_token]
-        # debugger
-      #if current_user render :json => {notice: "You are logged!", login: true}
+         user_signed_in?  ? true : false# strange
+
       # TODO instead of value of token ('9fioejwihr0gj9uiep') need to use function to create digest
-      # and save it in DB temporary
       render :json => {notice: info,
                        login: true,
-                       token: '9fioejwihr0gj9uiep'}
+                       token:  params[:authenticity_token]}
       else
-        user_signed_in?
+        user_signed_in? ? true : false # strange
         redirect_to home_path unless params[:user][:return_secure_token]
       end
     else
@@ -51,10 +50,10 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/TODO sign_out
   def destroy
-    debugger
+    # in this place have problem with DEVISE
       session.destroy
       if params[:react]
-          render :json, notice:"You signed out successfully."
+          render( :json => {notice: "You signed out successfully."})
         else
           # redirect_to home_path
       end
