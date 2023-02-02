@@ -31918,7 +31918,7 @@
         picture_url: "https://herokuapp.com"
       }
     ];
-    return /* @__PURE__ */ import_react20.default.createElement("div", { className: "road" }, /* @__PURE__ */ import_react20.default.createElement("ul", null, data.map((dt) => /* @__PURE__ */ import_react20.default.createElement(Card_default, null, dt))));
+    return /* @__PURE__ */ import_react20.default.createElement(Header_default, null, /* @__PURE__ */ import_react20.default.createElement("div", { className: "road" }, /* @__PURE__ */ import_react20.default.createElement("ul", null, data.map((dt) => /* @__PURE__ */ import_react20.default.createElement(Card_default, null, dt)))));
   };
   var ListPostedMessages_default = ListPostedMessages;
 
