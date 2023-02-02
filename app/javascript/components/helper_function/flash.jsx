@@ -15,3 +15,12 @@ export default function flash(type,  data) {
         currentDiv.style.height = '0'
     }, 10000);
 }
+
+export function list_messages_on() {
+    const div = document.querySelector('#list_messages')
+    div.style.display = 'list-item'
+}
+export function list_messages_off() {
+    const div = document.querySelector('#list_messages')
+    div.style.display =  'none'
+}

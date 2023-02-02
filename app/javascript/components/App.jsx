@@ -7,11 +7,13 @@ import ResendInstruction from "./Pages/ResendInstruction";
 import ResetPassword from "./Pages/ResetPassword";
 import ForgotPassword from "./Pages/ForgotPassword";
 import NotFound from "./Pages/NotFound";
+import ListPostedMessages from "./Pages/ListPostedMessages";
 
 const router = createBrowserRouter([
     {path: "/", element: <Home />},
     {path: "/login", element: <Login/>},
     {path: "/logout", element: ""},
+    {path: "/eg", element: <ListPostedMessages/>},
     {path: "/registration", element: <Registrations/>},
     {path: "/forgot_password", element: <ForgotPassword/>},
     {path: "/reset_password", element: <ResetPassword/>},

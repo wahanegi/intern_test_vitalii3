@@ -5,8 +5,10 @@ import useHttp from "../hooks/use-http";
 import {registrations, requests_answers} from "../lib/api";
 import Home from "./Home";
 import Header from "../Wrappers/Header";
+import {list_messages_off} from "../helper_function/flash";
 
 const Registrations = () => {
+    list_messages_off()
     // const {sendRequest, status, error} = useHttp(registrations)
     // const sendData = (data) => {
     //     const answer = sendRequest({user:data, commit:"Sign up"})

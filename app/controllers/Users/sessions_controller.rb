@@ -2,7 +2,8 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: :create
-  # prepend_before_action :user_signed_in?, only: :destroy
+   prepend_before_action :for_react_handler, only: :destroy
+  # skip_before_action :verify_signed_out_user, only: :destroy
 
 
   # GET /resource/sign_in
@@ -50,16 +51,26 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/TODO sign_out
   def destroy
-    if user_signed_in?
+    debugger
       session.destroy
-      redirect_to home_path
-    end
+      if params[:react]
+          render :json, notice:"You signed out successfully."
+        else
+          # redirect_to home_path
+      end
+
   end
+
+
 
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  end
+
+  def for_react_handler
+    # debugger
   end
 end

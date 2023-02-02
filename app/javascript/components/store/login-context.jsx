@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
+import useHttp from "../hooks/use-http";
+import {requests_answers} from "../lib/api";
 
 const LoginContext = React.createContext({
-    token: null,
+    token: '',
     isLoggedIn: false,
-    login: ()=>{},
+    login: (token)=>{},
     logout: ()=>{}
 });
 
 export const LoginContextProvider = (props) => {
     const initialToken = localStorage.getItem('token')
     const [token, setToken] = useState(initialToken)
+    const {sendRequest, status, data, error} = useHttp(requests_answers)
+
     const userIsLoggedIn = !!token
     const loginHandler = (token) =>{
         setToken(token)
@@ -20,6 +24,11 @@ export const LoginContextProvider = (props) => {
         setToken(null)
         localStorage.removeItem('token')
     //TODO     request to the server with Log out
+        sendRequest(
+            {dataUser:{react:true},
+                url:"/users/sign_out",
+                method: 'DELETE'}
+        )
     }
     const ContextValue = {
         token: token,

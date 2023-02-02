@@ -2958,9 +2958,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React22 = require_react();
+          var React24 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React24.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4565,7 +4565,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React22.Children.forEach(props.children, function(child) {
+                  React24.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -13012,7 +13012,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React22.Component().refs;
+          var emptyRefsObject = new React24.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -27853,11 +27853,11 @@
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/components/index.jsx
-  var import_react20 = __toESM(require_react());
+  var import_react22 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/App.jsx
-  var import_react19 = __toESM(require_react());
+  var import_react21 = __toESM(require_react());
 
   // node_modules/react-router-dom/dist/index.js
   var React3 = __toESM(require_react());
@@ -31414,27 +31414,178 @@
   }
 
   // app/javascript/components/Pages/Home.jsx
-  var import_react3 = __toESM(require_react());
+  var import_react12 = __toESM(require_react());
 
   // app/javascript/components/Wrappers/Header.jsx
-  var import_react2 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
 
   // app/javascript/components/store/login-context.jsx
+  var import_react3 = __toESM(require_react());
+
+  // app/javascript/components/hooks/use-http.jsx
   var import_react = __toESM(require_react());
-  var LoginContext = import_react.default.createContext({
-    token: null,
+
+  // app/javascript/components/helper_function/flash.jsx
+  function flash(type, data) {
+    const main = document.querySelector("#container > div");
+    main !== null ? main.remove() : "";
+    const currentDiv = document.getElementById("container");
+    const newDiv = document.createElement("div");
+    newDiv.className = "alert alert-" + type;
+    const newContent = document.createTextNode(data);
+    newDiv.appendChild(newContent);
+    currentDiv.append(newDiv);
+    currentDiv.style.opacity = "1";
+    currentDiv.style.height = "auto";
+    setTimeout(() => {
+      currentDiv.style.opacity = "0";
+      currentDiv.style.height = "0";
+    }, 1e4);
+  }
+  function list_messages_on() {
+    const div = document.querySelector("#list_messages");
+    div.style.display = "list-item";
+  }
+  function list_messages_off() {
+    const div = document.querySelector("#list_messages");
+    div.style.display = "none";
+  }
+
+  // app/javascript/components/hooks/use-http.jsx
+  function httpReducer(state, action) {
+    if (action.type === "SEND") {
+      return {
+        data: null,
+        error: null,
+        status: "pending"
+      };
+    }
+    if (action.type === "SUCCESS") {
+      if (action.responseData.info["notice"] !== void 0) {
+        flash("notice", action.responseData.info["notice"]);
+      } else if (action.responseData.info["danger"] !== void 0) {
+        flash("danger", action.responseData.info["danger"]);
+      }
+      return {
+        data: action.responseData,
+        error: null,
+        status: "completed"
+      };
+    }
+    if (action.type === "ERROR") {
+      return {
+        data: null,
+        error: action.errorMessage,
+        status: "completed"
+      };
+    }
+    return state;
+  }
+  function useHttp(requestFunction, startWithPending = false) {
+    const [httpState, dispatch2] = (0, import_react.useReducer)(httpReducer, {
+      status: startWithPending ? "pending" : null,
+      data: null,
+      error: null
+    });
+    const sendRequest = (0, import_react.useCallback)(
+      async function(requestData) {
+        dispatch2({ type: "SEND" });
+        try {
+          const responseData = await requestFunction(requestData);
+          dispatch2({ type: "SUCCESS", responseData });
+        } catch (error) {
+          dispatch2({
+            type: "ERROR",
+            errorMessage: error.message || "Something went wrong!"
+          });
+        }
+      },
+      [requestFunction]
+    );
+    return {
+      sendRequest,
+      ...httpState
+    };
+  }
+  var use_http_default = useHttp;
+
+  // app/javascript/components/lib/api.jsx
+  var import_react2 = __toESM(require_react());
+  var domain = location.origin;
+  console.log(domain);
+  var csrf_token = document.getElementsByName("csrf-token")[0].getAttribute("content");
+  var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
+  async function requests_answers(sData) {
+    sData.dataUser[csrf_param] = csrf_token;
+    try {
+      const responce = await fetch(
+        `${domain}${sData.url}`,
+        {
+          "method": sData.method,
+          "mode": "cors",
+          "cache": "no-cache",
+          "credentials": "same-origin",
+          "body": JSON.stringify(sData.dataUser),
+          "headers": { "Content-type": "application/json" }
+        }
+      );
+      const data = await responce.json();
+      console.log(data);
+      if (!responce.ok) {
+        throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
+      }
+      return { "info": data };
+    } catch (e) {
+      console.log(e.message);
+      flash("danger", e.message);
+      return true;
+    }
+  }
+
+  // app/javascript/components/store/login-context.jsx
+  var LoginContext = import_react3.default.createContext({
+    token: "",
     isLoggedIn: false,
-    login: () => {
+    login: (token) => {
     },
     logout: () => {
     }
   });
+  var LoginContextProvider = (props) => {
+    const initialToken = localStorage.getItem("token");
+    const [token, setToken] = (0, import_react3.useState)(initialToken);
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const userIsLoggedIn = !!token;
+    const loginHandler = (token2) => {
+      setToken(token2);
+      console.log(token2);
+      localStorage.setItem("token", token2);
+    };
+    const logoutHandler = () => {
+      setToken(null);
+      localStorage.removeItem("token");
+      sendRequest(
+        {
+          dataUser: { react: true },
+          url: "/users/sign_out",
+          method: "DELETE"
+        }
+      );
+    };
+    const ContextValue = {
+      token,
+      isLoggedIn: userIsLoggedIn,
+      login: loginHandler,
+      logout: logoutHandler
+    };
+    return /* @__PURE__ */ import_react3.default.createElement(LoginContext.Provider, { value: ContextValue }, props.children);
+  };
   var login_context_default = LoginContext;
 
   // app/javascript/components/icons/IconReact.jsx
-  var React5 = __toESM(require_react());
+  var React7 = __toESM(require_react());
   function IconReact(props) {
-    return /* @__PURE__ */ React5.createElement(
+    return /* @__PURE__ */ React7.createElement(
       "svg",
       {
         viewBox: "0 0 34 32",
@@ -31443,14 +31594,14 @@
         width: "1em",
         ...props
       },
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         "path",
         {
           fill: "currentColor",
           d: "M19.314 15.987a2.392 2.392 0 11-4.784 0 2.392 2.392 0 014.784 0z"
         }
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         "path",
         {
           fill: "currentColor",
@@ -31461,21 +31612,8 @@
   }
   var IconReact_default = IconReact;
 
-  // app/javascript/components/Wrappers/Header.jsx
-  var Header = (props) => {
-    const loginContext = (0, import_react2.useContext)(login_context_default);
-    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("div", { className: "lower-header" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "list-of-links" }, /* @__PURE__ */ import_react2.default.createElement("ul", null, /* @__PURE__ */ import_react2.default.createElement("li", null, !loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/login" }, "SIGN IN ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/" }, "NEW MESSAGE ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null))), /* @__PURE__ */ import_react2.default.createElement("li", null, !loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/registration" }, "SIGN UP ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/registration" }, "LOGOUT ", /* @__PURE__ */ import_react2.default.createElement(IconReact_default, null)))))), props.children);
-  };
-  var Header_default = Header;
-
-  // app/javascript/components/Pages/Home.jsx
-  var Home = () => {
-    return /* @__PURE__ */ import_react3.default.createElement(Header_default, null, /* @__PURE__ */ import_react3.default.createElement("h1", null, "THIS IS HOME PAGE CREATED REACT LIBRARY"));
-  };
-  var Home_default = Home;
-
   // app/javascript/components/Pages/Login.jsx
-  var import_react12 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
 
   // app/javascript/components/forms/Forms.jsx
   var import_react7 = __toESM(require_react());
@@ -31609,122 +31747,11 @@
   };
   var Links_default = Links;
 
-  // app/javascript/components/hooks/use-http.jsx
-  var import_react10 = __toESM(require_react());
-
-  // app/javascript/components/helper_function/flash.jsx
-  function flash(type, data) {
-    const main = document.querySelector("#container > div");
-    main !== null ? main.remove() : "";
-    const currentDiv = document.getElementById("container");
-    const newDiv = document.createElement("div");
-    newDiv.className = "alert alert-" + type;
-    const newContent = document.createTextNode(data);
-    newDiv.appendChild(newContent);
-    currentDiv.append(newDiv);
-    currentDiv.style.opacity = "1";
-    currentDiv.style.height = "auto";
-    setTimeout(() => {
-      currentDiv.style.opacity = "0";
-      currentDiv.style.height = "0";
-    }, 1e4);
-  }
-
-  // app/javascript/components/hooks/use-http.jsx
-  function httpReducer(state, action) {
-    if (action.type === "SEND") {
-      return {
-        data: null,
-        error: null,
-        status: "pending"
-      };
-    }
-    if (action.type === "SUCCESS") {
-      if (action.responseData.info["notice"] !== void 0) {
-        flash("notice", action.responseData.info["notice"]);
-      } else if (action.responseData.info["danger"] !== void 0) {
-        flash("danger", action.responseData.info["danger"]);
-      }
-      return {
-        data: action.responseData,
-        error: null,
-        status: "completed"
-      };
-    }
-    if (action.type === "ERROR") {
-      return {
-        data: null,
-        error: action.errorMessage,
-        status: "completed"
-      };
-    }
-    return state;
-  }
-  function useHttp(requestFunction, startWithPending = false) {
-    const [httpState, dispatch2] = (0, import_react10.useReducer)(httpReducer, {
-      status: startWithPending ? "pending" : null,
-      data: null,
-      error: null
-    });
-    const sendRequest = (0, import_react10.useCallback)(
-      async function(requestData) {
-        dispatch2({ type: "SEND" });
-        try {
-          const responseData = await requestFunction(requestData);
-          dispatch2({ type: "SUCCESS", responseData });
-        } catch (error) {
-          dispatch2({
-            type: "ERROR",
-            errorMessage: error.message || "Something went wrong!"
-          });
-        }
-      },
-      [requestFunction]
-    );
-    return {
-      sendRequest,
-      ...httpState
-    };
-  }
-  var use_http_default = useHttp;
-
-  // app/javascript/components/lib/api.jsx
-  var import_react11 = __toESM(require_react());
-  var domain = location.origin;
-  console.log(domain);
-  var csrf_token = document.getElementsByName("csrf-token")[0].getAttribute("content");
-  var csrf_param = document.getElementsByName("csrf-param")[0].getAttribute("content");
-  async function requests_answers(sData) {
-    sData.dataUser[csrf_param] = csrf_token;
-    try {
-      const responce = await fetch(
-        `${domain}${sData.url}`,
-        {
-          "method": sData.method,
-          "mode": "cors",
-          "cache": "no-cache",
-          "credentials": "same-origin",
-          "body": JSON.stringify(sData.dataUser),
-          "headers": { "Content-type": "application/json" }
-        }
-      );
-      const data = await responce.json();
-      console.log(data);
-      if (!responce.ok) {
-        throw new Error(data.message || `Error by ${sData.dataUser.commit}. Contact the administrator by email`);
-      }
-      return { "info": data };
-    } catch (e) {
-      console.log(e.message);
-      flash("danger", e.message);
-      return true;
-    }
-  }
-
   // app/javascript/components/Pages/Login.jsx
   var Login = () => {
+    list_messages_off();
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
-    const loginContext = (0, import_react12.useContext)(login_context_default);
+    const loginContext = (0, import_react10.useContext)(login_context_default);
     const sendData = (dt) => {
       sendRequest(
         {
@@ -31734,22 +31761,51 @@
         }
       );
     };
-    try {
-      if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
-        loginContext.login(data.info["token"]);
-        console.log(data.info["token"]);
-        return /* @__PURE__ */ import_react12.default.createElement(Home_default, null);
+    (0, import_react10.useEffect)(() => {
+      try {
+        if (status === "completed" && (data.info["danger"] === null || data.info["danger"] === void 0)) {
+          loginContext.login(data.info["token"]);
+        }
+      } catch (e) {
+        flash("danger", e.message);
       }
-    } catch (e) {
-      flash("danger", e.message);
-    }
-    return /* @__PURE__ */ import_react12.default.createElement(Header_default, null, /* @__PURE__ */ import_react12.default.createElement(Forms_default, { howFields: "2", title: "Login", wrtOnBtn: "It's my account", action: sendData }, /* @__PURE__ */ import_react12.default.createElement(Links_default, { form: "Login" })));
+    }, [status, data, error]);
+    return /* @__PURE__ */ import_react10.default.createElement(Header_default, null, !loginContext.isLoggedIn && /* @__PURE__ */ import_react10.default.createElement(Forms_default, { howFields: "2", title: "Login", wrtOnBtn: "It's my account", action: sendData }, /* @__PURE__ */ import_react10.default.createElement(Links_default, { form: "Login" })), loginContext.isLoggedIn && /* @__PURE__ */ import_react10.default.createElement(Home_default, null));
   };
   var Login_default = Login;
+
+  // app/javascript/components/Wrappers/Header.jsx
+  var Header = (props) => {
+    const navigate = useNavigate();
+    const loginContext = (0, import_react11.useContext)(login_context_default);
+    const logoutHandler = () => {
+      loginContext.logout();
+      navigate("/");
+    };
+    const signInHandler = (event) => {
+      navigate("/login");
+    };
+    const newMessageHandler = () => {
+      navigate("/");
+    };
+    const registrationsHandler = (event) => {
+      navigate("/registration");
+    };
+    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement("div", { className: "lower-header" }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "list-of-links" }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "button_to" }, !loginContext.isLoggedIn && /* @__PURE__ */ import_react11.default.createElement("button", { className: "button_menu", onClick: signInHandler }, "SIGN IN ", /* @__PURE__ */ import_react11.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react11.default.createElement("button", { className: "button_menu", onClick: newMessageHandler }, "NEW MESSAGE ", /* @__PURE__ */ import_react11.default.createElement(IconReact_default, null))), /* @__PURE__ */ import_react11.default.createElement("div", { className: "button_to" }, !loginContext.isLoggedIn && /* @__PURE__ */ import_react11.default.createElement("button", { className: "button_menu1", onClick: registrationsHandler }, "SIGN UP ", /* @__PURE__ */ import_react11.default.createElement(IconReact_default, null)), loginContext.isLoggedIn && /* @__PURE__ */ import_react11.default.createElement("button", { className: "button_menu1", onClick: logoutHandler }, "LOGOUT ", /* @__PURE__ */ import_react11.default.createElement(IconReact_default, null))))), props.children);
+  };
+  var Header_default = Header;
+
+  // app/javascript/components/Pages/Home.jsx
+  var Home = () => {
+    list_messages_on();
+    return /* @__PURE__ */ import_react12.default.createElement(Header_default, null, /* @__PURE__ */ import_react12.default.createElement("h1", null, "THIS IS HOME PAGE CREATED REACT LIBRARY"));
+  };
+  var Home_default = Home;
 
   // app/javascript/components/Pages/Registrations.jsx
   var import_react13 = __toESM(require_react());
   var Registrations = () => {
+    list_messages_off();
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
     const sendData = (data2) => {
       sendRequest(
@@ -31831,25 +31887,65 @@
   var import_react17 = __toESM(require_react());
   var portalElement = document.getElementById("overlays");
 
+  // app/javascript/components/Pages/ListPostedMessages.jsx
+  var import_react20 = __toESM(require_react());
+
+  // app/javascript/components/Pages/Card.jsx
+  var import_react19 = __toESM(require_react());
+  var Card = (props) => {
+    console.log(props.children);
+    return /* @__PURE__ */ import_react19.default.createElement("li", { className: "card" }, /* @__PURE__ */ import_react19.default.createElement("section", null, /* @__PURE__ */ import_react19.default.createElement("aside", { className: "avatar" }, /* @__PURE__ */ import_react19.default.createElement("span", { className: "user_info" }, props.children.id_posted), /* @__PURE__ */ import_react19.default.createElement("div", { className: "left-side" }, /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.gravatar_url, alt: props.children.user_name, className: "gravatar", width: "100px" })))), /* @__PURE__ */ import_react19.default.createElement("span", null, `@{props.user_name}-{props.user_email}} | `), /* @__PURE__ */ import_react19.default.createElement("span", null, "Posted ", props.children.created_at_in_words, " ago"), /* @__PURE__ */ import_react19.default.createElement("div", { className: "posted_message" }, props.children.content, !!props.children.picture_url && /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.picture_url })));
+  };
+  var Card_default = Card;
+
+  // app/javascript/components/Pages/ListPostedMessages.jsx
+  var ListPostedMessages = () => {
+    const data = [
+      {
+        id_posted: 1,
+        gravatar_url: "https://enn.com",
+        user_name: "vitalii",
+        user_email: "not@full.com",
+        created_at_in_words: "4 minute",
+        content: "Something interesting and funny",
+        picture_url: "https://herokuapp.com"
+      },
+      {
+        id_posted: 1,
+        gravatar_url: "https://enn.com",
+        user_name: "vitalii",
+        user_email: "not@full.com",
+        created_at_in_words: "4 minute",
+        content: "Something interesting and funny",
+        picture_url: "https://herokuapp.com"
+      }
+    ];
+    return /* @__PURE__ */ import_react20.default.createElement("div", { className: "road" }, /* @__PURE__ */ import_react20.default.createElement("ul", null, data.map((dt) => /* @__PURE__ */ import_react20.default.createElement(Card_default, null, dt))));
+  };
+  var ListPostedMessages_default = ListPostedMessages;
+
   // app/javascript/components/App.jsx
   var router = createBrowserRouter([
-    { path: "/", element: /* @__PURE__ */ import_react19.default.createElement(Home_default, null) },
-    { path: "/login", element: /* @__PURE__ */ import_react19.default.createElement(Login_default, null) },
+    { path: "/", element: /* @__PURE__ */ import_react21.default.createElement(Home_default, null) },
+    { path: "/login", element: /* @__PURE__ */ import_react21.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/registration", element: /* @__PURE__ */ import_react19.default.createElement(Registrations_default, null) },
-    { path: "/forgot_password", element: /* @__PURE__ */ import_react19.default.createElement(ForgotPassword_default, null) },
-    { path: "/reset_password", element: /* @__PURE__ */ import_react19.default.createElement(ResetPassword_default, null) },
-    { path: "/resend_instruction", element: /* @__PURE__ */ import_react19.default.createElement(ResendInstruction_default, null) },
-    { path: "*", element: /* @__PURE__ */ import_react19.default.createElement(Home_default, null) }
+    { path: "/eg", element: /* @__PURE__ */ import_react21.default.createElement(ListPostedMessages_default, null) },
+    { path: "/registration", element: /* @__PURE__ */ import_react21.default.createElement(Registrations_default, null) },
+    { path: "/forgot_password", element: /* @__PURE__ */ import_react21.default.createElement(ForgotPassword_default, null) },
+    { path: "/reset_password", element: /* @__PURE__ */ import_react21.default.createElement(ResetPassword_default, null) },
+    { path: "/resend_instruction", element: /* @__PURE__ */ import_react21.default.createElement(ResendInstruction_default, null) },
+    { path: "*", element: /* @__PURE__ */ import_react21.default.createElement(Home_default, null) }
   ]);
   var App = () => {
-    return /* @__PURE__ */ import_react19.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react21.default.createElement(RouterProvider, { router });
   };
   var App_default = App;
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react20.default.createElement(App_default, null));
+  root.render(
+    /* @__PURE__ */ import_react22.default.createElement(LoginContextProvider, null, /* @__PURE__ */ import_react22.default.createElement(App_default, null))
+  );
 })();
 /*! Bundled license information:
 
