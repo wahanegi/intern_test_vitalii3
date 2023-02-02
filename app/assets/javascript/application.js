@@ -1646,7 +1646,7 @@
             }
             return dispatcher;
           }
-          function useContext6(Context) {
+          function useContext7(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -2451,7 +2451,7 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback4;
-          exports.useContext = useContext6;
+          exports.useContext = useContext7;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect9;
@@ -31905,7 +31905,7 @@
         user_name: "vitalii",
         user_email: "not@full.com",
         created_at_in_words: "4 minute",
-        content: "Something interesting and funny",
+        content: "Something interesting and funny. This Page in development. If you want see a new message please refresh the tab",
         picture_url: "https://herokuapp.com"
       },
       {
@@ -31925,6 +31925,8 @@
   // app/javascript/components/Pages/NewMessage.jsx
   var import_react21 = __toESM(require_react());
   var NewMessage = () => {
+    list_messages_off();
+    const loginContext = (0, import_react21.useContext)(login_context_default);
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
     const {
       value: valueEntered,
@@ -31953,7 +31955,7 @@
         flash("danger", e.message);
       }
     }, [status, data, error]);
-    return /* @__PURE__ */ import_react21.default.createElement(Header_default, null, /* @__PURE__ */ import_react21.default.createElement(MainWrapper_default, { chapter: "NEW MESSAGE" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "cover" }, /* @__PURE__ */ import_react21.default.createElement("form", { onSubmit: sendDataOnServer }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "content" }, /* @__PURE__ */ import_react21.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(Header_default, null, loginContext.isLoggedIn && /* @__PURE__ */ import_react21.default.createElement(MainWrapper_default, { chapter: "NEW MESSAGE" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "cover" }, /* @__PURE__ */ import_react21.default.createElement("form", { onSubmit: sendDataOnServer }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "content" }, /* @__PURE__ */ import_react21.default.createElement(
       "textarea",
       {
         id: "posted_message_content",

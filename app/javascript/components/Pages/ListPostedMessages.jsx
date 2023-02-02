@@ -9,7 +9,7 @@ const ListPostedMessages = () => {
         user_name:"vitalii",
         user_email:"not@full.com",
         created_at_in_words: "4 minute",
-        content: "Something interesting and funny",
+        content: "Something interesting and funny. This Page in development. If you want see a new message please refresh the tab",
         picture_url:"https://herokuapp.com"
     },
         {

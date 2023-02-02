@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import MainWrapper from "../Wrappers/MainWrapper";
 import {Link} from "react-router-dom";
 import ListPostedMessages from "./ListPostedMessages";
 import useInput from "../hooks/use-input";
 import useHttp from "../hooks/use-http";
 import {requests_answers} from "../lib/api";
-import flash from "../helper_function/flash";
+import flash, {list_messages_off} from "../helper_function/flash";
 import Header from "../Wrappers/Header";
+import LoginContext from "../store/login-context";
 
 const NewMessage = () => {
+    list_messages_off()
+    const loginContext = useContext(LoginContext)
     const {sendRequest, status, data, error} = useHttp(requests_answers)
     const {
         value: valueEntered,
@@ -36,7 +39,7 @@ const NewMessage = () => {
     },[ status, data, error ])
     return (
         <Header>
-        <MainWrapper chapter="NEW MESSAGE">
+            {loginContext.isLoggedIn && <MainWrapper chapter="NEW MESSAGE">
                 <div className="cover">
 
                     <form onSubmit={sendDataOnServer}>
@@ -59,7 +62,7 @@ const NewMessage = () => {
                         <Link to="/eg">BACK TO MAIN PAGE</Link>
                     </div>
                 </div>
-        </MainWrapper>
+        </MainWrapper>}
             </Header>
     );
 };
