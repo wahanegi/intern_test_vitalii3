@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "./Card";
+import Header from "../Wrappers/Header";
 
 const ListPostedMessages = () => {
     const data = [{
@@ -21,11 +22,13 @@ const ListPostedMessages = () => {
         picture_url:"https://herokuapp.com"}]
 
     return (
+        <Header>
         <div className="road">
             <ul>
                 {data.map((dt)=>(<Card>{dt}</Card>))}
             </ul>
         </div>
+        </Header>
     );
 };
 
