@@ -1,6 +1,6 @@
 # Pin npm packages by running ./bin/importmap
 
-pin "jquery", to: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
+# pin "jquery", to: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
 pin "application", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true

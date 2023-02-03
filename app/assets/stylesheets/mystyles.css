@@ -97,19 +97,21 @@ span{
     position: fixed;
     bottom: 3px;
     width:120px;
-
+    height: auto;
 }
 .button_to .button_menu{
     margin-left:150px;
     right:5px;
+    height:50px;
 }
 .button_to .button_menu1{
     margin-right:15px;
     left:5px;
+    height:50px;
 }
 .button,.button_menu, .button_logout, .button_menu1{
     width: 100%;
-    height: 50px;
+    height: auto;
     background-color: aqua;
     box-shadow: inset 3px 3px 5px lightskyblue,
     inset -3px -3px 5px lightskyblue;
@@ -119,6 +121,7 @@ span{
     border-radius: 15px;
     font-weight: 200;
     transition: .3s;
+    /*font-size: 2em;*/
 }
 .button:hover, .button_menu:hover, .button_logout:hover, .button_menu1:hover{
     background-color: #00afff;
@@ -126,13 +129,21 @@ span{
 }
 
 #error_explanation{
-display:block;
-//height:7vh;
+    display:block;
     color:red;
     font-weight: bold;
     list-style: none;
     margin:0;
     padding:0;
+}
+#error_explanation_react{
+    display:block;
+    color:red;
+    font-weight: bold;
+    list-style: none;
+    margin:0;
+    padding:0;
+    white-space: pre-wrap;
 }
 .field{
     display: block;
@@ -154,9 +165,10 @@ input{
 
 label{
     font-size: larger;
+    text-transform: capitalize;
 }
 
-.container{
+#container{
     width:97%;
     height: 0;
     font-weight: bold;
@@ -392,8 +404,108 @@ aside section h1 {
 #posted_message_picture{
     color: #730E15;
 }
-.trix-content {
+.trix-content h1{
     padding-bottom: inherit;
+    line-height: 1em;
+}
+/*#####################*/
+.invalid {
+    border: 1px solid red;
+    background-color: #fddddd;
+}
+.invalid:focus {
+    border-color: #ff8800;
+    background-color: #fbe8d0;
+}
+
+.button{
+    font-size: 2em;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active{
+    background-color: #ccc;
+    box-shadow: 0 0 0 0 #ccc;
+    border-color: #ccc;
+    transition: 0s;
+    font-weight: 200;
+    cursor: not-allowed;
+    height: auto;
+}
+.emoji{
+    font-size: 5rem;;
+}
+.from_big_to_small {
+    animation: decreasing 1s ease-in 0.5s;
+    font-size:2rem;
+    font-weight: 900;
+    color:rgb(68, 46, 46);
+    text-align: center;
 }
 
 
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 7vh;
+    left: 1%;
+    width: 98%;
+    background-color: white;
+    padding: 0.1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+    overflow: auto;
+    border-radius: 1rem;
+}
+.close{
+    position: fixed;
+    left: 98%;
+    top:2vh;
+    left:92%;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+    overflow:hidden;
+}
+.close:active{
+    background-color: black;
+    color:white
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: 40rem;
+        left: calc(50% - 20rem);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#list_messages{
+    display:list-item;
+}

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   # obj - object with errors
   def respond_err_with_json(obj)
     respond_to do |format|
+      format.json { render json: obj.errors, status: 200 }
       format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: obj.errors, status: :unprocessable_entity }
     end
   end
   #respond in HTML & JSON formats
@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   # info - notice for user
   def success_respond_with_json(path, info)
     respond_to do |format|
+      format.json { render  status: 200 , announcement: info}
       format.html { redirect_to path, notice: info}
-      format.json { render  status: 200 }
     end
   end
 

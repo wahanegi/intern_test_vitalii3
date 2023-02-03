@@ -1,20 +1,47 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  #TODO Setting Rails for using SendGrid in production environment
-  config.action_mailer.raise_delivery_errors = true
+
+  #FOR TESTING MAILTRAP INBOX
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['user_name_for_heroku'],
+    :password => ENV['password_test_mailtrap_for_heroku'],
+    :address => 'sandbox.smtp.mailtrap.io',
+    :domain => 'sandbox.smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
+  # TODO Setting Rails for using Mailtrap in development environment
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
   host = 'cp-vitalii.herokuapp.com'
   config.action_mailer.default_url_options = { protocol: 'https', host:  host }
-  ActionMailer::Base.smtp_settings = {
-    :address  => 'smtp.sendgrid.net',
-    :port  => 587,
-    :authentication  => :plain,
-    :user_name  => 'apikey',
-    :password  => ENV['SENDGRID_API_KEY'],
-    :domain  => 'heroku.com',
-    :enable_starttls_auto => true
-  }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address  => 'smtp.mailtrap.io',
+  #   :port  => 587,
+  #   :authentication  => :plain,
+  #   :user_name  => 'apikey',
+  #   :password  => ENV['MAILTRAP_API_KEY'],
+  #   :domain  => 'heroku.com',
+  #   :enable_starttls_auto => true
+  # }
+
+  # #TODO Setting Rails for using SendGrid in production environment
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # host = 'cp-vitalii.herokuapp.com'
+  # config.action_mailer.default_url_options = { protocol: 'https', host:  host }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address  => 'smtp.sendgrid.net',
+  #   :port  => 587,
+  #   :authentication  => :plain,
+  #   :user_name  => 'apikey',
+  #   :password  => ENV['SENDGRID_API_KEY'],
+  #   :domain  => 'heroku.com',
+  #   :enable_starttls_auto => true
+  # }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -45,7 +72,7 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
+  #  config.asset_host = "https://cp-vitalii.herokuapp.com/"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache

@@ -7,11 +7,13 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload" , defer: true   %>
+  <%#= javascript_importmap_tags %>
+<!--  <script type="module">import "application"</script>-->
 </head>
 
 <body>
-<div class="container">
+<div id="container">
   <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
   <% end %>

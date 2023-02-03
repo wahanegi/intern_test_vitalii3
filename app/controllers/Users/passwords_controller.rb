@@ -11,8 +11,13 @@ class Users::PasswordsController < Devise::PasswordsController
   def create
     @user = User.send_reset_password_instructions(resource_params)
     yield @user if block_given?
-    send_instruction_with_notice(@user, false, home_path, new_user_registration_path)
-
+    if resource_params['return_secure_token']
+      @user.errors.messages.any? ?
+        render(:json => {danger:"Your MailBox 📫 not found 🐕"})
+        : render(:json => {notice:"Check 👁 the Letter with instruction on your MailBox 📫"})
+    else
+      send_instruction_with_notice(@user, false, home_path, new_user_registration_path)
+    end
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef
