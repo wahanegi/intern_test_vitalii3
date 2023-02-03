@@ -59,7 +59,7 @@ const NewMessage = () => {
                     <br/>
 
                     <div className="link">
-                        <Link to="/eg">BACK TO MAIN PAGE</Link>
+                        <Link to="/react_home">BACK TO MAIN PAGE</Link>
                     </div>
                 </div>
         </MainWrapper>}

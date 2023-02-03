@@ -1646,7 +1646,7 @@
             }
             return dispatcher;
           }
-          function useContext7(Context) {
+          function useContext8(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1660,7 +1660,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState8(initialState) {
+          function useState9(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1672,7 +1672,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect9(create, deps) {
+          function useEffect10(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2451,10 +2451,10 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback4;
-          exports.useContext = useContext7;
+          exports.useContext = useContext8;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect9;
+          exports.useEffect = useEffect10;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2462,7 +2462,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
-          exports.useState = useState8;
+          exports.useState = useState9;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -31543,16 +31543,20 @@
 
   // app/javascript/components/store/login-context.jsx
   var LoginContext = import_react3.default.createContext({
+    postedMessages: [],
     token: "",
     isLoggedIn: false,
     login: (token) => {
     },
     logout: () => {
+    },
+    setPostedMessages: (data) => {
     }
   });
   var LoginContextProvider = (props) => {
     const initialToken = localStorage.getItem("token");
     const [token, setToken] = (0, import_react3.useState)(initialToken);
+    const [messages, setMessages] = (0, import_react3.useState)([]);
     const { sendRequest, status, data, error } = use_http_default(requests_answers);
     const userIsLoggedIn = !!token;
     const loginHandler = (token2) => {
@@ -31571,11 +31575,16 @@
         }
       );
     };
+    const setData = (data2) => {
+      setMessages(data2);
+    };
     const ContextValue = {
+      postedMessages: messages,
       token,
       isLoggedIn: userIsLoggedIn,
       login: loginHandler,
-      logout: logoutHandler
+      logout: logoutHandler,
+      setPostedMessages: setData
     };
     return /* @__PURE__ */ import_react3.default.createElement(LoginContext.Provider, { value: ContextValue }, props.children);
   };
@@ -31892,33 +31901,30 @@
   // app/javascript/components/Pages/Card.jsx
   var import_react19 = __toESM(require_react());
   var Card = (props) => {
-    return /* @__PURE__ */ import_react19.default.createElement("li", { className: "card" }, /* @__PURE__ */ import_react19.default.createElement("section", null, /* @__PURE__ */ import_react19.default.createElement("aside", { className: "avatar" }, /* @__PURE__ */ import_react19.default.createElement("span", { className: "user_info" }, props.children.id_posted), /* @__PURE__ */ import_react19.default.createElement("div", { className: "left-side" }, /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.gravatar_url, alt: props.children.user_name, className: "gravatar", width: "100px" })))), /* @__PURE__ */ import_react19.default.createElement("span", null, `@{props.user_name}-{props.user_email}} | `), /* @__PURE__ */ import_react19.default.createElement("span", null, "Posted ", props.children.created_at_in_words, " ago"), /* @__PURE__ */ import_react19.default.createElement("div", { className: "posted_message" }, props.children.content, !!props.children.picture_url && /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.picture_url })));
+    return /* @__PURE__ */ import_react19.default.createElement("li", { className: "card" }, /* @__PURE__ */ import_react19.default.createElement("section", null, /* @__PURE__ */ import_react19.default.createElement("aside", { className: "avatar" }, /* @__PURE__ */ import_react19.default.createElement("span", { className: "user_info" }, props.children.id_posted), /* @__PURE__ */ import_react19.default.createElement("div", { className: "left-side" }, /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.gravatar_url, alt: props.children.user_name, className: "gravatar", width: "100px" })))), /* @__PURE__ */ import_react19.default.createElement("span", null, "@", props.children.user_name, "-", props.children.user_email, " | "), /* @__PURE__ */ import_react19.default.createElement("span", null, "Posted ", props.children.created_at_in_words, " ago"), /* @__PURE__ */ import_react19.default.createElement("div", { className: "posted_message" }, props.children.content, !!props.children.picture_url && /* @__PURE__ */ import_react19.default.createElement("img", { src: props.children.picture_url, alt: "photo" })));
   };
   var Card_default = Card;
 
   // app/javascript/components/Pages/ListPostedMessages.jsx
   var ListPostedMessages = () => {
-    const data = [
-      {
-        id_posted: 1,
-        gravatar_url: "https://enn.com",
-        user_name: "vitalii",
-        user_email: "not@full.com",
-        created_at_in_words: "4 minute",
-        content: "Something interesting and funny. This Page in development. If you want see a new message please refresh the tab",
-        picture_url: "https://herokuapp.com"
-      },
-      {
-        id_posted: 1,
-        gravatar_url: "https://enn.com",
-        user_name: "vitalii",
-        user_email: "not@full.com",
-        created_at_in_words: "4 minute",
-        content: "Something interesting and funny",
-        picture_url: "https://herokuapp.com"
+    const { sendRequest, status, data, error } = use_http_default(requests_answers);
+    const messCntx = (0, import_react20.useContext)(login_context_default);
+    console.log(messCntx.postedMessages);
+    (0, import_react20.useEffect)(() => {
+      if (data !== null) {
+        messCntx.setPostedMessages(data.info.data);
       }
-    ];
-    return /* @__PURE__ */ import_react20.default.createElement(Header_default, null, /* @__PURE__ */ import_react20.default.createElement("div", { className: "road" }, /* @__PURE__ */ import_react20.default.createElement("ul", null, data.map((dt) => /* @__PURE__ */ import_react20.default.createElement(Card_default, null, dt)))));
+    }, [data]);
+    (0, import_react20.useEffect)(() => {
+      sendRequest(
+        {
+          dataUser: { json: { count: messCntx.postedMessages.length } },
+          url: "/api",
+          method: "POST"
+        }
+      );
+    }, []);
+    return /* @__PURE__ */ import_react20.default.createElement(Header_default, null, /* @__PURE__ */ import_react20.default.createElement("div", { className: "road" }, !!messCntx.postedMessages.length && /* @__PURE__ */ import_react20.default.createElement("ul", null, messCntx.postedMessages.map((dt) => /* @__PURE__ */ import_react20.default.createElement(Card_default, { key: dt.id_posted }, dt)))));
   };
   var ListPostedMessages_default = ListPostedMessages;
 
@@ -31964,7 +31970,7 @@
         onChange: valueChangeInputHandler,
         onBlur: blurHandler
       }
-    ), thisInputHasError && /* @__PURE__ */ import_react21.default.createElement("p", { id: "error_explanation_react" }, `"Message can't be empty and more 256 chars"`)), /* @__PURE__ */ import_react21.default.createElement("button", { className: "button", disabled: !valueIsValid }, " Post new message")), /* @__PURE__ */ import_react21.default.createElement("br", null), /* @__PURE__ */ import_react21.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react21.default.createElement(Link, { to: "/eg" }, "BACK TO MAIN PAGE")))));
+    ), thisInputHasError && /* @__PURE__ */ import_react21.default.createElement("p", { id: "error_explanation_react" }, `"Message can't be empty and more 256 chars"`)), /* @__PURE__ */ import_react21.default.createElement("button", { className: "button", disabled: !valueIsValid }, " Post new message")), /* @__PURE__ */ import_react21.default.createElement("br", null), /* @__PURE__ */ import_react21.default.createElement("div", { className: "link" }, /* @__PURE__ */ import_react21.default.createElement(Link, { to: "/react_home" }, "BACK TO MAIN PAGE")))));
   };
   var NewMessage_default = NewMessage;
 
@@ -31973,7 +31979,7 @@
     { path: "/", element: /* @__PURE__ */ import_react22.default.createElement(Home_default, null) },
     { path: "/login", element: /* @__PURE__ */ import_react22.default.createElement(Login_default, null) },
     { path: "/logout", element: "" },
-    { path: "/eg", element: /* @__PURE__ */ import_react22.default.createElement(ListPostedMessages_default, null) },
+    { path: "/react_home", element: /* @__PURE__ */ import_react22.default.createElement(ListPostedMessages_default, null) },
     { path: "/new_message", element: /* @__PURE__ */ import_react22.default.createElement(NewMessage_default, null) },
     { path: "/registration", element: /* @__PURE__ */ import_react22.default.createElement(Registrations_default, null) },
     { path: "/forgot_password", element: /* @__PURE__ */ import_react22.default.createElement(ForgotPassword_default, null) },

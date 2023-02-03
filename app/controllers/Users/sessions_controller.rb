@@ -16,6 +16,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    self.resource = warden.authenticate!(auth_options)
     password_valid = (@user = User.find_by(email: sign_in_params[:email])) ?
                        @user.valid_password?(sign_in_params[:password])
                        : false
@@ -51,6 +52,7 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/TODO sign_out
   def destroy
     # in this place have problem with DEVISE
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
       session.destroy
       if params[:react]
           render( :json => {notice: "You signed out successfully."})

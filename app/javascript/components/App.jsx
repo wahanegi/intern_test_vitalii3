@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     {path: "/", element: <Home />},
     {path: "/login", element: <Login/>},
     {path: "/logout", element: ""},
-    {path: "/eg", element: <ListPostedMessages/>},
+    {path: "/react_home", element: <ListPostedMessages/>},
     {path: "/new_message", element: <NewMessage/>},
     {path: "/registration", element: <Registrations/>},
     {path: "/forgot_password", element: <ForgotPassword/>},

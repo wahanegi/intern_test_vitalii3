@@ -1,32 +1,34 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Card from "./Card";
 import Header from "../Wrappers/Header";
+import useHttp from "../hooks/use-http";
+import {requests_answers} from "../lib/api";
+import loginContext from "../store/login-context";
 
 const ListPostedMessages = () => {
-    const data = [{
-        id_posted:1,
-        gravatar_url:"https://enn.com",
-        user_name:"vitalii",
-        user_email:"not@full.com",
-        created_at_in_words: "4 minute",
-        content: "Something interesting and funny. This Page in development. If you want see a new message please refresh the tab",
-        picture_url:"https://herokuapp.com"
-    },
-        {
-        id_posted:1,
-        gravatar_url:"https://enn.com",
-        user_name:"vitalii",
-        user_email:"not@full.com",
-        created_at_in_words: "4 minute",
-        content: "Something interesting and funny",
-        picture_url:"https://herokuapp.com"}]
+    const {sendRequest, status, data, error} = useHttp(requests_answers)
+    const messCntx= useContext(loginContext)
+console.log (messCntx.postedMessages)
+    useEffect(()=>{
+        if (data !== null) {
+            messCntx.setPostedMessages(data.info.data)
+        }
+    },[data])
+
+    useEffect(()=>{
+        sendRequest(
+            {dataUser:{json:{count: messCntx.postedMessages.length }},
+                url:"/api",
+                method: 'POST'}
+        )
+    },[])
 
     return (
         <Header>
         <div className="road">
-            <ul>
-                {data.map((dt)=>(<Card>{dt}</Card>))}
-            </ul>
+            { !!messCntx.postedMessages.length &&  <ul>
+                {messCntx.postedMessages.map((dt)=>(<Card key={dt.id_posted}>{dt}</Card>))}
+            </ul>}
         </div>
         </Header>
     );

@@ -3,15 +3,18 @@ import useHttp from "../hooks/use-http";
 import {requests_answers} from "../lib/api";
 
 const LoginContext = React.createContext({
+    postedMessages: [],
     token: '',
     isLoggedIn: false,
     login: (token)=>{},
-    logout: ()=>{}
+    logout: ()=>{},
+    setPostedMessages: (data)=>{}
 });
 
 export const LoginContextProvider = (props) => {
     const initialToken = localStorage.getItem('token')
     const [token, setToken] = useState(initialToken)
+    const [messages, setMessages] = useState([])
     const {sendRequest, status, data, error} = useHttp(requests_answers)
 
     const userIsLoggedIn = !!token
@@ -30,11 +33,16 @@ export const LoginContextProvider = (props) => {
                 method: 'DELETE'}
         )
     }
+    const setData = (data) =>{
+        setMessages(data)
+    }
     const ContextValue = {
+        postedMessages: messages,
         token: token,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        setPostedMessages: setData
     }
     return (
        <LoginContext.Provider value = {ContextValue}>
